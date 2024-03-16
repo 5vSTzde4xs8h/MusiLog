@@ -1,4 +1,4 @@
-package com.example.musilog;
+package com.jvn.musilog;
 
 import android.content.Context;
 
@@ -17,10 +17,10 @@ import static org.junit.Assert.*;
  */
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
-    @Test
-    public void useAppContext() {
-        // Context of the app under test.
-        Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("com.example.musilog", appContext.getPackageName());
-    }
+  @Test
+  public void useAppContext() {
+    // Context of the app under test.
+    Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
+    assertEquals("com.jvn.musilog", appContext.getPackageName());
+  }
 }
