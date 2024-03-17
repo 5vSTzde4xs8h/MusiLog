@@ -62,6 +62,10 @@ public class TrackMetadata {
   private static TrackMetadata fromSpotify(String sourceId) {
     SpotifyApi api = ApiProvider.getSpotifyApi();
 
+    if (api == null) {
+      return new TrackMetadata();
+    }
+
     try {
       GetTrackRequest trackRequest = api.getTrack(sourceId).market(CountryCode.US).build();
 
@@ -83,7 +87,7 @@ public class TrackMetadata {
 
       return new TrackMetadata(
           trackResponse.getName(), artistLine.toString(), albumCoverArtUrls[0].getUrl());
-    } catch (IOException | SpotifyWebApiException | ParseException | NullPointerException except) {
+    } catch (IOException | SpotifyWebApiException | ParseException except) {
       return new TrackMetadata();
     }
   }
