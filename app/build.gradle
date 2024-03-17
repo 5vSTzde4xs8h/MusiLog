@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    alias(libs.plugins.secrets)
     alias(libs.plugins.googleServices)
 }
 
@@ -7,6 +8,10 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+secrets {
+    propertiesFileName 'secrets.properties'
 }
 
 android {
@@ -29,6 +34,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    buildFeatures {
+        buildConfig true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+    }
 }
 
 dependencies {
@@ -42,4 +55,16 @@ dependencies {
 
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.firestore
+
+    implementation(libs.google.api.client) {
+        exclude group: "org.apache.httpcomponents"
+        exclude group: "com.google.auth", module: "google-auth-library-credentials"
+    }
+
+    implementation(libs.google.api.services.youtube) {
+        exclude group: "org.apache.httpcomponents"
+        exclude group: "com.google.auth"
+    }
+
+    implementation libs.spotify.web.api.java
 }
