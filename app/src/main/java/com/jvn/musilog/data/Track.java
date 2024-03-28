@@ -9,16 +9,25 @@ import java.util.regex.*;
  * @since 2024-03-17
  */
 public class Track {
-  /** Regex pattern for a YouTube video ID. */
+  /**
+   * Regex pattern for a YouTube video ID. Google doesn't specify the format of these IDs, but <a
+   * href="https://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video#answer-101153">reverse-engineering</a>
+   * suggests that the format is modified Base64.
+   */
   private static final String youTubeIdRegex = "[0-9A-Za-z-_]+";
 
-  /** Regex {@link Pattern} for a Spotify track URL. */
+  /**
+   * Regex {@link Pattern} for a Spotify track URL. The format of the ID is Base62, as described <a
+   * href="https://developer.spotify.com/documentation/web-api/concepts/spotify-uris-ids">in
+   * Spotify's documentation</a>.
+   */
   private static final Pattern spotifyTrackUrlPattern =
       Pattern.compile("^(https?://)?open\\.spotify\\.com/track/([0-9A-Za-z]+)");
 
   /** Regex {@link Pattern} for a YouTube video URL. */
   private static final Pattern youTubeVideoUrlPattern =
-      Pattern.compile("^(https?://)?((www|music)\\.)?youtube\\.com/watch.*[?&]v=(" + youTubeIdRegex + ")");
+      Pattern.compile(
+          "^(https?://)?((www|music)\\.)?youtube\\.com/watch.*[?&]v=(" + youTubeIdRegex + ")");
 
   /** Regex {@link Pattern} for a YouTube video short URL. */
   private static final Pattern youTubeVideoShortUrlPattern =
