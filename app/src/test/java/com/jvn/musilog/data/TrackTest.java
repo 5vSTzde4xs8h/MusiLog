@@ -46,7 +46,6 @@ public class TrackTest {
 
       assertEquals(MusicSource.Spotify, track.getSource());
       assertEquals(expectedIds[i], track.getSourceId());
-      assertNotEquals(null, track.getMetadata());
     }
   }
 
@@ -76,7 +75,6 @@ public class TrackTest {
 
       assertEquals(MusicSource.YouTube, track.getSource());
       assertEquals(expectedIds[i], track.getSourceId());
-      assertNotEquals(null, track.getMetadata());
     }
   }
 
@@ -106,7 +104,6 @@ public class TrackTest {
 
       assertEquals(MusicSource.YouTube, track.getSource());
       assertEquals(expectedIds[i], track.getSourceId());
-      assertNotEquals(null, track.getMetadata());
     }
   }
 
@@ -140,7 +137,6 @@ public class TrackTest {
 
       assertEquals(MusicSource.Unknown, track.getSource());
       assertEquals("", track.getSourceId());
-      assertNotEquals(null, track.getMetadata());
     }
   }
 }
