@@ -93,6 +93,33 @@ public class Track {
   }
 
   /**
+   * Returns the hash code for this {@link Track}, to be used in equality comparisons. Tracks with
+   * the same {@link Track#source source} and {@link Track#sourceId sourceId} will have the same
+   * hash code.
+   *
+   * @return The {@link Track}'s hash code
+   */
+  @Override
+  public int hashCode() {
+    return (source.toString() + ":" + sourceId).hashCode();
+  }
+
+  /**
+   * Checks if two {@link Track}s are equal to each other.
+   *
+   * @param that The {@link Track} to compare
+   * @return A {@code boolean} indicating if the two objects are equal
+   */
+  @Override
+  public boolean equals(Object that) {
+    if ((that == null) || (that.getClass() != Track.class)) {
+      return false;
+    }
+
+    return that.hashCode() == hashCode();
+  }
+
+  /**
    * @return The {@link MusicSource} for this music track
    */
   @PropertyName(SOURCE_FIELD)

@@ -11,6 +11,26 @@ import org.junit.Test;
  * @since 2024-03-17
  */
 public class TrackTest {
+  /** Tests that {@link Track}s with the same data are equal, and that {@link Track}s that don't have the same data are not equal. */
+  @Test
+  public void testEquality() {
+    // same sources, same IDs
+    Track track1 = new Track(MusicSource.Unknown, "ABCD");
+    Track equalTrack1 = new Track(MusicSource.Unknown, "ABCD");
+
+    // different sources, same IDs
+    Track track2 = new Track(MusicSource.Spotify, "ABCD");
+    Track unequalTrack2 = new Track(MusicSource.YouTube, "ABCD");
+
+    // same sources, different IDs
+    Track track3 = new Track(MusicSource.YouTube, "ABCD");
+    Track unequalTrack3 = new Track(MusicSource.YouTube, "EFGH");
+
+    assertEquals(track1, equalTrack1);
+    assertNotEquals(track2, unequalTrack2);
+    assertNotEquals(track3, unequalTrack3);
+  }
+
   /** Tests that {@link Track}s for Spotify URLs are correctly generated. */
   @Test
   public void testFromSpotifyUrl() {
