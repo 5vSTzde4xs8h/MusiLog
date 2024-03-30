@@ -90,7 +90,7 @@ public class User {
 
   /**
    * @return The user's playlist, which will not contain duplicate tracks (tracks with the same
-   *     source and source ID) or {@code null} tracks
+   *     source and source ID) or {@code null} tracks, and which may be {@code null}
    */
   @PropertyName(PLAYLIST_FIELD)
   public ArrayList<Track> getPlaylist() {

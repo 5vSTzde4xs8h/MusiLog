@@ -102,6 +102,16 @@ public class UserTest {
     assertEquals(track3, returnedPlaylist.get(2));
   }
 
+  /** Tests that the playlist is returned properly. */
+  @Test
+  public void testPlaylist() {
+    User newUser1 = new User(null, null, null, null);
+    User newUser2 = new User(new ArrayList<Track>(), null, null, null);
+
+    assertNull(newUser1.getPlaylist());
+    assertNotNull(newUser2.getPlaylist());
+  }
+
   /** Tests that the playlist description is returned properly. */
   @Test
   public void testPlaylistDescription() {
