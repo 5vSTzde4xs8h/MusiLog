@@ -10,7 +10,6 @@ constraintlayout = "2.1.4"
 googleServices = "4.4.1"
 secrets = "2.0.1"
 firebaseBom = "32.7.4"
-googleApiClient = "2.4.0"
 googleApiServicesYouTube = "v3-rev20240310-2.0.0"
 spotifyWebApiJava = "8.3.6"
 
@@ -24,7 +23,6 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom"  }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
-google-api-client = { module = "com.google.api-client:google-api-client", version.ref = "googleApiClient" }
 google-api-services-youtube = { module = "com.google.apis:google-api-services-youtube", version.ref = "googleApiServicesYouTube" }
 spotify-web-api-java = { module = "se.michaelthelin.spotify:spotify-web-api-java", version.ref = "spotifyWebApiJava" }
 

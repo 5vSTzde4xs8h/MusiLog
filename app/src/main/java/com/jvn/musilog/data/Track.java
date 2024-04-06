@@ -1,14 +1,22 @@
 package com.jvn.musilog.data;
 
+import com.google.firebase.firestore.PropertyName;
+
 import java.util.regex.*;
 
 /**
- * Class for music track data.
+ * Class for music track data. Meant to be used as a custom object in Firestore.
  *
  * @author Poleon Banouvong
  * @since 2024-03-17
  */
 public class Track {
+  /** The corresponding Firestore document field name for the {@link Track#source} member. */
+  private static final String SOURCE_FIELD = "source";
+
+  /** The corresponding Firestore document field name for the {@link Track#sourceId} member. */
+  private static final String SOURCE_ID_FIELD = "sourceId";
+
   /**
    * Regex pattern for a YouTube video ID. Google doesn't specify the format of these IDs, but <a
    * href="https://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video#answer-101153">reverse-engineering</a>
@@ -39,17 +47,18 @@ public class Track {
   /** The ID of the music track, relative to its source. */
   private String sourceId;
 
-  /** The metadata of the music track. */
-  private TrackMetadata metadata;
+  /** Default constructor. Required to be public to be used as a custom object in Firestore. */
+  public Track() {}
 
-  /** Private default constructor. Use {@link Track#fromUrl} instead. */
-  private Track() {}
-
-  /** Private qualified constructor. Use {@link Track#fromUrl} instead. */
-  private Track(MusicSource source, String sourceId, TrackMetadata metadata) {
+  /**
+   * Qualified {@link Track} constructor.
+   *
+   * @param source The {@link MusicSource} the track is coming from
+   * @param sourceId The source ID of the track
+   */
+  public Track(MusicSource source, String sourceId) {
     this.source = source;
     this.sourceId = sourceId;
-    this.metadata = metadata;
   }
 
   /**
@@ -80,13 +89,40 @@ public class Track {
       sourceId = "";
     }
 
-    TrackMetadata metadata = TrackMetadata.fromMusicSource(source, sourceId);
-    return new Track(source, sourceId, metadata);
+    return new Track(source, sourceId);
+  }
+
+  /**
+   * Returns the hash code for this {@link Track}, to be used in equality comparisons. Tracks with
+   * the same {@link Track#source source} and {@link Track#sourceId sourceId} will have the same
+   * hash code.
+   *
+   * @return The {@link Track}'s hash code
+   */
+  @Override
+  public int hashCode() {
+    return (source.toString() + ":" + sourceId).hashCode();
+  }
+
+  /**
+   * Checks if two {@link Track}s are equal to each other.
+   *
+   * @param that The {@link Track} to compare
+   * @return A {@code boolean} indicating if the two objects are equal
+   */
+  @Override
+  public boolean equals(Object that) {
+    if ((that == null) || (that.getClass() != Track.class)) {
+      return false;
+    }
+
+    return that.hashCode() == hashCode();
   }
 
   /**
    * @return The {@link MusicSource} for this music track
    */
+  @PropertyName(SOURCE_FIELD)
   public MusicSource getSource() {
     return source;
   }
@@ -94,14 +130,8 @@ public class Track {
   /**
    * @return The source ID, relative to the music source, for this music track
    */
+  @PropertyName(SOURCE_ID_FIELD)
   public String getSourceId() {
     return sourceId;
-  }
-
-  /**
-   * @return The metadata for this music track
-   */
-  public TrackMetadata getMetadata() {
-    return metadata;
   }
 }
