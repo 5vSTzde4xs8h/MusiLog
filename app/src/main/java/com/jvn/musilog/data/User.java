@@ -23,14 +23,6 @@ public class User {
   private static final String PLAYLIST_DESCRIPTION_FIELD = "playlistDescription";
 
   /**
-   * The corresponding Firestore document field name for the {@link User#averageRating} variable.
-   */
-  private static final String AVERAGE_RATING_FIELD = "averageRating";
-
-  /** The corresponding Firestore document field name for the {@link User#numRatings} variable. */
-  private static final String NUM_RATINGS_FIELD = "numRatings";
-
-  /**
    * The list of music tracks the user has added to their playlist. This list must not contain any
    * duplicate tracks, tracks whose sources are {@link MusicSource#Unknown Unknown}, or {@code null}
    * tracks.<br>
@@ -43,12 +35,6 @@ public class User {
   /** The description of the user's playlist. */
   private String playlistDescription;
 
-  /** The average rating of the user's playlist. */
-  private Float averageRating;
-
-  /** The number of ratings on the user's playlist. */
-  private Integer numRatings;
-
   /** Default constructor. Required to be public to be used as a custom object in Firestore. */
   public User() {}
 
@@ -59,14 +45,10 @@ public class User {
    *
    * @param playlist The list of {@link Track}s in the user's playlist
    * @param playlistDescription The description of the user's playlist
-   * @param averageRating The average rating of the user's playlist
-   * @param numRatings The number of ratings on the user's playlist
    */
   public User(
       ArrayList<Track> playlist,
-      String playlistDescription,
-      Float averageRating,
-      Integer numRatings) {
+      String playlistDescription) {
     if (playlist != null) {
       // converting the list to a LinkedHashSet removes duplicate tracks
       LinkedHashSet<Track> checkedPlaylist = new LinkedHashSet<Track>(playlist);
@@ -84,8 +66,6 @@ public class User {
     }
 
     this.playlistDescription = playlistDescription;
-    this.averageRating = averageRating;
-    this.numRatings = numRatings;
   }
 
   /**
@@ -107,21 +87,5 @@ public class User {
   @PropertyName(PLAYLIST_DESCRIPTION_FIELD)
   public String getPlaylistDescription() {
     return playlistDescription;
-  }
-
-  /**
-   * @return The average rating of the user's playlist.
-   */
-  @PropertyName(AVERAGE_RATING_FIELD)
-  public Float getAveragePlaylistRating() {
-    return averageRating;
-  }
-
-  /**
-   * @return the number of ratings on the user's playlist.
-   */
-  @PropertyName(NUM_RATINGS_FIELD)
-  public Integer getNumPlaylistRatings() {
-    return numRatings;
   }
 }

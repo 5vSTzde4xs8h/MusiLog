@@ -29,12 +29,10 @@ public class UserTest {
     playlist.add(spotifyTrack);
     playlist.add(youTubeTrack);
 
-    User newUser = new User(playlist, "This is a playlist.", (float) 0, 0);
+    User newUser = new User(playlist, "This is a playlist.");
 
     assertEquals(2, newUser.getPlaylist().size());
     assertEquals("This is a playlist.", newUser.getPlaylistDescription());
-    assertEquals(0, (float) newUser.getAveragePlaylistRating(), 0);
-    assertEquals(0, (int) newUser.getNumPlaylistRatings());
   }
 
   /**
@@ -50,7 +48,7 @@ public class UserTest {
     playlist.add(youTubeTrack);
     playlist.add(track4);
 
-    User newUser = new User(playlist, null, null, null);
+    User newUser = new User(playlist, null);
     assertEquals(2, newUser.getPlaylist().size());
   }
 
@@ -74,8 +72,8 @@ public class UserTest {
     playlist2.add(new Track(MusicSource.Spotify, "abcd"));
     playlist2.add(new Track(MusicSource.Spotify, "abcd"));
 
-    User newUser1 = new User(playlist1, null, null, null);
-    User newUser2 = new User(playlist2, null, null, null);
+    User newUser1 = new User(playlist1, null);
+    User newUser2 = new User(playlist2, null);
 
     assertEquals(1, newUser1.getPlaylist().size());
     assertEquals(1, newUser2.getPlaylist().size());
@@ -94,7 +92,7 @@ public class UserTest {
     playlist.add(youTubeTrack);
     playlist.add(track3);
 
-    User newUser = new User(playlist, null, null, null);
+    User newUser = new User(playlist, null);
     ArrayList<Track> returnedPlaylist = newUser.getPlaylist();
 
     assertEquals(spotifyTrack, returnedPlaylist.get(0));
@@ -105,8 +103,8 @@ public class UserTest {
   /** Tests that the playlist is returned properly. */
   @Test
   public void testPlaylist() {
-    User newUser1 = new User(null, null, null, null);
-    User newUser2 = new User(new ArrayList<Track>(), null, null, null);
+    User newUser1 = new User(null, null);
+    User newUser2 = new User(new ArrayList<Track>(), null);
 
     assertNull(newUser1.getPlaylist());
     assertNotNull(newUser2.getPlaylist());
@@ -115,21 +113,7 @@ public class UserTest {
   /** Tests that the playlist description is returned properly. */
   @Test
   public void testPlaylistDescription() {
-    User newUser = new User(null, "This is a null playlist.", null, null);
+    User newUser = new User(null, "This is a null playlist.");
     assertEquals("This is a null playlist.", newUser.getPlaylistDescription());
-  }
-
-  /** Tests that the average rating is returned properly. */
-  @Test
-  public void testAverageRating() {
-    User newUser = new User(null, null, (float) 1.24, null);
-    assertEquals(1.24, newUser.getAveragePlaylistRating(), 0.01);
-  }
-
-  /** Tests that the number of ratings is returned properly. */
-  @Test
-  public void testNumRatings() {
-    User newUser = new User(null, null, null, 250);
-    assertEquals(250, (int) newUser.getNumPlaylistRatings());
   }
 }
