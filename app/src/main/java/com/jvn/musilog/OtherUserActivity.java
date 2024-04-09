@@ -3,6 +3,7 @@ package com.jvn.musilog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
+import android.util.Log;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -49,40 +50,44 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
  * @since 2023-04-05
  */
 public class OtherUserActivity extends AppCompatActivity {
-  /** The Firestore query for the user's data. */
-  DocumentReference userDocument;
+  /** Class tag for identifying output in Logcat. */
+  private static final String TAG = "OtherUserActivity";
 
-  /** The Firestore query for the currently-authenticated user's rating of the user' playlist. */
-  DocumentReference thisUserRatingDocument;
+  /** The Firestore query for the user's data. */
+  private DocumentReference userDocument;
+
+  /** The Firestore query for the currently-authenticated user's rating of the user's playlist. */
+  private DocumentReference thisUserRatingDocument;
 
   /**
    * The Firestore query for the number of ratings and the average rating of the user's playlist.
    */
-  AggregateQuery ratingQuery;
+  private AggregateQuery ratingQuery;
 
   /** The TextView representing the description of the user's playlist. */
-  TextView playlistDescriptionView;
+  private TextView playlistDescriptionView;
 
   /** The TextView representing the average rating info of the user's playlist. */
-  TextView ratingTextView;
+  private TextView ratingTextView;
 
   /** The RecyclerView containing the list of track in the user's playlist. */
-  RecyclerView playlistView;
+  private RecyclerView playlistView;
 
   /**
    * The MaterialRatingBar representing the currently-authenticated user's rating of the user's
    * playlist.
    */
-  MaterialRatingBar thisUserRatingBar;
+  private MaterialRatingBar thisUserRatingBar;
 
   /** The current rating of the currently-authenticated user's rating of the user's playlist. */
-  float lastRating;
+  private float lastRating;
 
   /** Listener to be invoked when a Firestore query necessary for the activity fails. */
-  OnFailureListener criticalQueryFailureListener =
+  private final OnFailureListener criticalQueryFailureListener =
       new OnFailureListener() {
         @Override
         public void onFailure(@NonNull Exception e) {
+          Log.e(TAG, e.toString());
           finish();
         }
       };
@@ -160,6 +165,7 @@ public class OtherUserActivity extends AppCompatActivity {
     Bundle extraData = getIntent().getExtras();
 
     if (extraData == null) {
+      Log.e(TAG, "Intent did not contain userId");
       finish();
     } else {
       FirebaseFirestore firestore = FirebaseFirestore.getInstance();
@@ -206,6 +212,7 @@ public class OtherUserActivity extends AppCompatActivity {
                 // check if the document could be cast to User
                 if (user == null) {
                   finish();
+                  Log.e(TAG, "Unable to cast User object; check the document fields");
                   return;
                 }
 
