@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.jvn.musilog.data.Rating;
 import com.jvn.musilog.data.Track;
 import com.jvn.musilog.data.User;
+import com.jvn.musilog.util.DocumentFields;
 import com.jvn.musilog.view.PlaylistAdapter;
 
 import java.util.ArrayList;
@@ -110,7 +111,10 @@ public class OtherUserActivity extends AppCompatActivity {
               @Override
               public void onSuccess(AggregateQuerySnapshot aggregateQuerySnapshot) {
                 long numRatings = aggregateQuerySnapshot.get(AggregateField.count());
-                Double averageRating = aggregateQuerySnapshot.get(AggregateField.average("rating"));
+
+                Double averageRating =
+                    aggregateQuerySnapshot.get(
+                        AggregateField.average(DocumentFields.Rating.RATING_FIELD));
 
                 if (averageRating == null) {
                   averageRating = 0.0;
@@ -177,7 +181,8 @@ public class OtherUserActivity extends AppCompatActivity {
       // the number of ratings and the average rating of the user's playlist
       // https://firebase.google.com/docs/firestore/query-data/aggregation-queries
       ratingQuery =
-          userRatingCollection.aggregate(AggregateField.count(), AggregateField.average("rating"));
+          userRatingCollection.aggregate(
+              AggregateField.count(), AggregateField.average(DocumentFields.Rating.RATING_FIELD));
     }
   }
 
@@ -222,7 +227,8 @@ public class OtherUserActivity extends AppCompatActivity {
                 if (!documentSnapshot.exists()) {
                   rating = 0;
                 } else {
-                  Double ratingDouble = documentSnapshot.getDouble("rating");
+                  Double ratingDouble =
+                      documentSnapshot.getDouble(DocumentFields.Rating.RATING_FIELD);
 
                   if (ratingDouble == null) {
                     rating = 0;

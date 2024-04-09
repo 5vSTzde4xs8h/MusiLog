@@ -1,8 +1,9 @@
 package com.jvn.musilog.data;
 
+import static com.jvn.musilog.util.DocumentFields.User.*;
+
 import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.PropertyName;
-import com.jvn.musilog.util.DocumentFields;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -16,18 +17,6 @@ import java.util.function.Predicate;
  */
 @IgnoreExtraProperties
 public class User {
-  /** The corresponding Firestore document field name for the {@link User#playlist} variable. */
-  private static final String PLAYLIST_FIELD = "playlist";
-
-  /**
-   * The corresponding Firestore document field name for the {@link User#playlistDescription}
-   * variable.
-   */
-  private static final String PLAYLIST_DESCRIPTION_FIELD = "playlistDescription";
-
-  /** The Firestore document field for the user's display name. */
-  private static final String DISPLAY_NAME_FIELD = "displayName";
-
   /**
    * The list of music tracks the user has added to their playlist. This list must not contain any
    * duplicate tracks, tracks whose sources are {@link MusicSource#Unknown Unknown}, or {@code null}

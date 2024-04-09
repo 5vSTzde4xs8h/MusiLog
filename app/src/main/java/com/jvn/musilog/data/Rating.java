@@ -1,5 +1,7 @@
 package com.jvn.musilog.data;
 
+import static com.jvn.musilog.util.DocumentFields.Rating.*;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.PropertyName;
 import com.google.firebase.firestore.ServerTimestamp;
@@ -11,12 +13,6 @@ import com.google.firebase.firestore.ServerTimestamp;
  * @since 2024-04-07
  */
 public class Rating {
-  /** The Firestore document field name for the {@link Rating#rating rating} variable. */
-  private static final String RATING_FIELD = "rating";
-
-  /** The Firestore document field name for the {@link Rating#timestamp timestamp} variable. */
-  private static final String TIMESTAMP_FIELD = "timestamp";
-
   /** The rating. */
   private Float rating;
 
