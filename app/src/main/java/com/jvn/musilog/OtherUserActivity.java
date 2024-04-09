@@ -8,6 +8,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -214,6 +215,13 @@ public class OtherUserActivity extends AppCompatActivity {
                   finish();
                   Log.e(TAG, "Unable to cast User object; check the document fields");
                   return;
+                }
+
+                // set page title
+                ActionBar actionBar = getSupportActionBar();
+
+                if (actionBar != null) {
+                  actionBar.setTitle(String.format("%s's Playlist", user.getDisplayName()));
                 }
 
                 playlistDescriptionView.setText(user.getPlaylistDescription());
