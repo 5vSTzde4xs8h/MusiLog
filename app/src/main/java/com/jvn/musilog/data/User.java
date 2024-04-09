@@ -1,6 +1,8 @@
 package com.jvn.musilog.data;
 
+import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.PropertyName;
+import com.jvn.musilog.util.DocumentFields;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -12,6 +14,7 @@ import java.util.function.Predicate;
  * @author Poleon Banouvong
  * @since 2024-03-29
  */
+@IgnoreExtraProperties
 public class User {
   /** The corresponding Firestore document field name for the {@link User#playlist} variable. */
   private static final String PLAYLIST_FIELD = "playlist";
@@ -21,6 +24,9 @@ public class User {
    * variable.
    */
   private static final String PLAYLIST_DESCRIPTION_FIELD = "playlistDescription";
+
+  /** The Firestore document field for the user's display name. */
+  private static final String DISPLAY_NAME_FIELD = "displayName";
 
   /**
    * The list of music tracks the user has added to their playlist. This list must not contain any
@@ -35,6 +41,9 @@ public class User {
   /** The description of the user's playlist. */
   private String playlistDescription;
 
+  /** The display name of the user. */
+  private String displayName;
+
   /** Default constructor. Required to be public to be used as a custom object in Firestore. */
   public User() {}
 
@@ -47,6 +56,7 @@ public class User {
    * @param playlistDescription The description of the user's playlist
    */
   public User(
+      String displayName,
       ArrayList<Track> playlist,
       String playlistDescription) {
     if (playlist != null) {
@@ -65,6 +75,7 @@ public class User {
       this.playlist = new ArrayList<Track>(checkedPlaylist);
     }
 
+    this.displayName = displayName;
     this.playlistDescription = playlistDescription;
   }
 
@@ -82,10 +93,18 @@ public class User {
   }
 
   /**
-   * @return The user's playlist description.
+   * @return The user's playlist description
    */
   @PropertyName(PLAYLIST_DESCRIPTION_FIELD)
   public String getPlaylistDescription() {
     return playlistDescription;
+  }
+
+  /**
+   * @return The user account's display name
+   */
+  @PropertyName(DISPLAY_NAME_FIELD)
+  public String getDisplayName() {
+    return displayName;
   }
 }

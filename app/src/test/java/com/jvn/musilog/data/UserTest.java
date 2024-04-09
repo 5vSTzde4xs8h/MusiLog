@@ -29,8 +29,9 @@ public class UserTest {
     playlist.add(spotifyTrack);
     playlist.add(youTubeTrack);
 
-    User newUser = new User(playlist, "This is a playlist.");
+    User newUser = new User("pbanouvong", playlist, "This is a playlist.");
 
+    assertEquals("pbanouvong", newUser.getDisplayName());
     assertEquals(2, newUser.getPlaylist().size());
     assertEquals("This is a playlist.", newUser.getPlaylistDescription());
   }
@@ -48,7 +49,7 @@ public class UserTest {
     playlist.add(youTubeTrack);
     playlist.add(track4);
 
-    User newUser = new User(playlist, null);
+    User newUser = new User(null, playlist, null);
     assertEquals(2, newUser.getPlaylist().size());
   }
 
@@ -72,8 +73,8 @@ public class UserTest {
     playlist2.add(new Track(MusicSource.Spotify, "abcd"));
     playlist2.add(new Track(MusicSource.Spotify, "abcd"));
 
-    User newUser1 = new User(playlist1, null);
-    User newUser2 = new User(playlist2, null);
+    User newUser1 = new User(null, playlist1, null);
+    User newUser2 = new User(null, playlist2, null);
 
     assertEquals(1, newUser1.getPlaylist().size());
     assertEquals(1, newUser2.getPlaylist().size());
@@ -92,7 +93,7 @@ public class UserTest {
     playlist.add(youTubeTrack);
     playlist.add(track3);
 
-    User newUser = new User(playlist, null);
+    User newUser = new User(null, playlist, null);
     ArrayList<Track> returnedPlaylist = newUser.getPlaylist();
 
     assertEquals(spotifyTrack, returnedPlaylist.get(0));
@@ -100,11 +101,21 @@ public class UserTest {
     assertEquals(track3, returnedPlaylist.get(2));
   }
 
+  /** Tests that the display name is returned properly. */
+  @Test
+  public void testDisplayName() {
+    User newUser1 = new User(null, null, null);
+    User newUser2 = new User("pbanouvong", null, null);
+
+    assertNull(newUser1.getDisplayName());
+    assertNotNull(newUser2.getDisplayName());
+  }
+
   /** Tests that the playlist is returned properly. */
   @Test
   public void testPlaylist() {
-    User newUser1 = new User(null, null);
-    User newUser2 = new User(new ArrayList<Track>(), null);
+    User newUser1 = new User(null, null, null);
+    User newUser2 = new User(null, new ArrayList<Track>(), null);
 
     assertNull(newUser1.getPlaylist());
     assertNotNull(newUser2.getPlaylist());
@@ -113,7 +124,7 @@ public class UserTest {
   /** Tests that the playlist description is returned properly. */
   @Test
   public void testPlaylistDescription() {
-    User newUser = new User(null, "This is a null playlist.");
+    User newUser = new User(null, null, "This is a null playlist.");
     assertEquals("This is a null playlist.", newUser.getPlaylistDescription());
   }
 }
