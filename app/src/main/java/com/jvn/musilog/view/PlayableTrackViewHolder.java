@@ -33,7 +33,7 @@ public class PlayableTrackViewHolder extends RecyclerView.ViewHolder {
   private static final String YOUTUBE_MUSIC_TRACK_URL = "https://music.youtube.com/watch?v=";
 
   /** The activity the view holder is running under. */
-  AppCompatActivity activity;
+  private final AppCompatActivity activity;
 
   /** The TextView for the track's title. */
   private final TextView titleView;
