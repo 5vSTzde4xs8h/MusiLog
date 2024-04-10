@@ -168,29 +168,30 @@ public class OtherUserActivity extends AppCompatActivity {
     if (extraData == null) {
       Log.e(TAG, "Intent did not contain userId");
       finish();
-    } else {
-      FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-      FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
-
-      FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-      String userId = extraData.getString("userId");
-
-      if ((userId == null) || (currentUser == null)) {
-        finish();
-        return;
-      }
-
-      userDocument = firestore.collection("users").document(userId);
-
-      CollectionReference userRatingCollection = userDocument.collection("ratings");
-      thisUserRatingDocument = userRatingCollection.document(currentUser.getUid());
-
-      // the number of ratings and the average rating of the user's playlist
-      // https://firebase.google.com/docs/firestore/query-data/aggregation-queries
-      ratingQuery =
-          userRatingCollection.aggregate(
-              AggregateField.count(), AggregateField.average(DocumentFields.Rating.RATING_FIELD));
+      return;
     }
+
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+
+    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+    String userId = extraData.getString("userId");
+
+    if ((userId == null) || (currentUser == null)) {
+      finish();
+      return;
+    }
+
+    userDocument = firestore.collection("users").document(userId);
+
+    CollectionReference userRatingCollection = userDocument.collection("ratings");
+    thisUserRatingDocument = userRatingCollection.document(currentUser.getUid());
+
+    // the number of ratings and the average rating of the user's playlist
+    // https://firebase.google.com/docs/firestore/query-data/aggregation-queries
+    ratingQuery =
+        userRatingCollection.aggregate(
+            AggregateField.count(), AggregateField.average(DocumentFields.Rating.RATING_FIELD));
   }
 
   /** Retrieve the user's data and set up UI events. */
