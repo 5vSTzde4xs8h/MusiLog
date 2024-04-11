@@ -1,5 +1,8 @@
 package com.jvn.musilog.data;
 
+import static com.jvn.musilog.util.DocumentFields.User.*;
+
+import com.google.firebase.firestore.IgnoreExtraProperties;
 import com.google.firebase.firestore.PropertyName;
 
 import java.util.ArrayList;
@@ -12,24 +15,8 @@ import java.util.function.Predicate;
  * @author Poleon Banouvong
  * @since 2024-03-29
  */
+@IgnoreExtraProperties
 public class User {
-  /** The corresponding Firestore document field name for the {@link User#playlist} variable. */
-  private static final String PLAYLIST_FIELD = "playlist";
-
-  /**
-   * The corresponding Firestore document field name for the {@link User#playlistDescription}
-   * variable.
-   */
-  private static final String PLAYLIST_DESCRIPTION_FIELD = "playlistDescription";
-
-  /**
-   * The corresponding Firestore document field name for the {@link User#averageRating} variable.
-   */
-  private static final String AVERAGE_RATING_FIELD = "averageRating";
-
-  /** The corresponding Firestore document field name for the {@link User#numRatings} variable. */
-  private static final String NUM_RATINGS_FIELD = "numRatings";
-
   /**
    * The list of music tracks the user has added to their playlist. This list must not contain any
    * duplicate tracks, tracks whose sources are {@link MusicSource#Unknown Unknown}, or {@code null}
@@ -43,11 +30,8 @@ public class User {
   /** The description of the user's playlist. */
   private String playlistDescription;
 
-  /** The average rating of the user's playlist. */
-  private Float averageRating;
-
-  /** The number of ratings on the user's playlist. */
-  private Integer numRatings;
+  /** The display name of the user. */
+  private String displayName;
 
   /** Default constructor. Required to be public to be used as a custom object in Firestore. */
   public User() {}
@@ -59,14 +43,11 @@ public class User {
    *
    * @param playlist The list of {@link Track}s in the user's playlist
    * @param playlistDescription The description of the user's playlist
-   * @param averageRating The average rating of the user's playlist
-   * @param numRatings The number of ratings on the user's playlist
    */
   public User(
+      String displayName,
       ArrayList<Track> playlist,
-      String playlistDescription,
-      Float averageRating,
-      Integer numRatings) {
+      String playlistDescription) {
     if (playlist != null) {
       // converting the list to a LinkedHashSet removes duplicate tracks
       LinkedHashSet<Track> checkedPlaylist = new LinkedHashSet<Track>(playlist);
@@ -83,9 +64,8 @@ public class User {
       this.playlist = new ArrayList<Track>(checkedPlaylist);
     }
 
+    this.displayName = displayName;
     this.playlistDescription = playlistDescription;
-    this.averageRating = averageRating;
-    this.numRatings = numRatings;
   }
 
   /**
@@ -102,7 +82,7 @@ public class User {
   }
 
   /**
-   * @return The user's playlist description.
+   * @return The user's playlist description
    */
   @PropertyName(PLAYLIST_DESCRIPTION_FIELD)
   public String getPlaylistDescription() {
@@ -110,18 +90,10 @@ public class User {
   }
 
   /**
-   * @return The average rating of the user's playlist.
+   * @return The user account's display name
    */
-  @PropertyName(AVERAGE_RATING_FIELD)
-  public Float getAveragePlaylistRating() {
-    return averageRating;
-  }
-
-  /**
-   * @return the number of ratings on the user's playlist.
-   */
-  @PropertyName(NUM_RATINGS_FIELD)
-  public Integer getNumPlaylistRatings() {
-    return numRatings;
+  @PropertyName(DISPLAY_NAME_FIELD)
+  public String getDisplayName() {
+    return displayName;
   }
 }

@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">MusiLog</string>
+    <string name="tracks">Tracks</string>
+    <string name="about">About</string>
+
+    <string name="loading_text">…</string>
+
+    <string name="user_data_load_error">Could not load user data</string>
+    <string name="rating_set_error">Could not update playlist rating</string>
+    <string name="average_rating">Rating: %1.2f (%d)</string>
+
+    <string name="track_cover_art_description">Track cover art</string>
+    <string name="track_play_button_description">Play track on %s</string>
+
+    <string name="auth_required">Sign-in is required, please try again.</string>
+    <string name="auth_error">Sign-in error, please try again.</string>
 </resources>
