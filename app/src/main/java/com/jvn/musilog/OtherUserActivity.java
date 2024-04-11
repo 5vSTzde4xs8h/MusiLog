@@ -44,8 +44,8 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
 /**
  * The activity for viewing a user's page.
  *
- * <p>To initialise this activity, the intent must contain contain the user's ID in the extra data
- * key {@code userId}. See {@link Intent#putExtra(String, String)}.
+ * <p>To initialise this activity, the intent must contain the user's ID in the extra data key
+ * {@code userId}. See {@link Intent#putExtra(String, String)}.
  *
  * @author Poleon Banouvong
  * @since 2023-04-05
