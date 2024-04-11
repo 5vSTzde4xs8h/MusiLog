@@ -41,6 +41,7 @@ public class User {
    * source is {@link MusicSource#Unknown Unknown}, those tracks will be removed. Additionally, if
    * the playlist contains duplicate tracks, all but one of the duplicate tracks will be removed.
    *
+   * @param displayName The display name of the user
    * @param playlist The list of {@link Track}s in the user's playlist
    * @param playlistDescription The description of the user's playlist
    */

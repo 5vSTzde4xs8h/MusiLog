@@ -34,6 +34,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlayableTrackViewHolde
   /**
    * Creates a new PlaylistAdapter.
    *
+   * @param activity The activity the adapter is running under
    * @param playlist The playlist to render
    */
   public PlaylistAdapter(AppCompatActivity activity, ArrayList<Track> playlist) {
