@@ -31,15 +31,19 @@ public class PlaylistAdapter extends RecyclerView.Adapter<TrackViewHolder> {
   /** The Activity the adapter is running under. */
   private final AppCompatActivity activity;
 
+  /** If the play buttons for each track should be shown. */
+  private final boolean showPlayButtons;
+
   /**
    * Creates a new PlaylistAdapter.
    *
    * @param activity The activity the adapter is running under
    * @param playlist The playlist to render
    */
-  public PlaylistAdapter(AppCompatActivity activity, ArrayList<Track> playlist) {
+  public PlaylistAdapter(AppCompatActivity activity, ArrayList<Track> playlist, boolean showPlayButtons) {
     this.activity = activity;
     this.playlist = playlist;
+    this.showPlayButtons = showPlayButtons;
   }
 
   /**
@@ -98,12 +102,16 @@ public class PlaylistAdapter extends RecyclerView.Adapter<TrackViewHolder> {
                       @Override
                       public void run() {
                         TrackMetadata thisMetadata;
+                        boolean forceHidePlayButtons = false;
 
                         if (metadata == null) {
                           thisMetadata = new TrackMetadata("(Unknown)", "(Unknown)", null);
-                          holder.setupPlayButton(MusicSource.Unknown, null);
+                          forceHidePlayButtons = true;
                         } else {
                           thisMetadata = metadata;
+                        }
+
+                        if (showPlayButtons && !forceHidePlayButtons) {
                           holder.setupPlayButton(track.getSource(), track.getSourceId());
                         }
 
