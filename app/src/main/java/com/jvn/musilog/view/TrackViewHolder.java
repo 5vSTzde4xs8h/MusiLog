@@ -92,7 +92,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
       return;
     }
 
-    Glide.with(activity).load(coverArtUrl).error(R.drawable.error_dark).into(coverArtView);
+    Glide.with(activity).load(coverArtUrl).error(R.drawable.error_icon).into(coverArtView);
   }
 
   /**
@@ -145,7 +145,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
         buttonDescription = "";
         sourceUrl = null;
         buttonColor = R.color.black;
-        buttonIcon = R.drawable.error_dark;
+        buttonIcon = R.drawable.error_icon;
     }
 
     if (sourceUrl == null) {
@@ -159,7 +159,7 @@ public class TrackViewHolder extends RecyclerView.ViewHolder {
         activity.getResources().getColor(buttonColor, activity.getTheme()));
 
     // load the play button's icon
-    Glide.with(activity).load(buttonIcon).error(R.drawable.error_dark).fitCenter().into(playButton);
+    Glide.with(activity).load(buttonIcon).error(R.drawable.error_icon).fitCenter().into(playButton);
 
     playButton.setOnClickListener(
         new View.OnClickListener() {
