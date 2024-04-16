@@ -17,12 +17,12 @@ import com.jvn.musilog.data.MusicSource;
 import com.jvn.musilog.util.AppAvailability;
 
 /**
- * The ViewHolder for the view that represents a playable music track.
+ * The ViewHolder for the view that represents a music track.
  *
  * @author Poleon Banouong
  * @since 2024-04-06
  */
-public class PlayableTrackViewHolder extends RecyclerView.ViewHolder {
+public class TrackViewHolder extends RecyclerView.ViewHolder {
   /** The URL format for Spotify tracks. */
   private static final String SPOTIFY_TRACK_URL = "https://open.spotify.com/track/";
 
@@ -53,7 +53,7 @@ public class PlayableTrackViewHolder extends RecyclerView.ViewHolder {
    * @param activity The activity the view holder is running under
    * @param itemView The view representing a playlist item
    */
-  public PlayableTrackViewHolder(AppCompatActivity activity, @NonNull View itemView) {
+  public TrackViewHolder(AppCompatActivity activity, @NonNull View itemView) {
     super(itemView);
 
     this.activity = activity;
@@ -165,6 +165,7 @@ public class PlayableTrackViewHolder extends RecyclerView.ViewHolder {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
+            // launch the activity for the music link
             Intent intent = new Intent(Intent.ACTION_VIEW);
             intent.setData(Uri.parse(sourceUrl));
 
