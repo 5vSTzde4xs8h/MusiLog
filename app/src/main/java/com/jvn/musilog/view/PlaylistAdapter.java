@@ -62,7 +62,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<TrackViewHolder> {
   @Override
   public TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.playable_track, parent, false);
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.playlist_item, parent, false);
 
     return new TrackViewHolder(activity, view);
   }
