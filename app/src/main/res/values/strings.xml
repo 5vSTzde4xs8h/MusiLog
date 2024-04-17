@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">MusiLog</string>
+    <string name="description_section">Description about the playlist.....</string>
+    <string name="welcome_user">Hello User</string>
+    <string name="playlist_name">Playlist\'s Name</string>
 </resources>
