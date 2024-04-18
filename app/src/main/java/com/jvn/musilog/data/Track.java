@@ -1,5 +1,7 @@
 package com.jvn.musilog.data;
 
+import static com.jvn.musilog.util.DocumentFields.Track.*;
+
 import com.google.firebase.firestore.PropertyName;
 
 import java.util.regex.*;
@@ -11,12 +13,6 @@ import java.util.regex.*;
  * @since 2024-03-17
  */
 public class Track {
-  /** The corresponding Firestore document field name for the {@link Track#source} member. */
-  private static final String SOURCE_FIELD = "source";
-
-  /** The corresponding Firestore document field name for the {@link Track#sourceId} member. */
-  private static final String SOURCE_ID_FIELD = "sourceId";
-
   /**
    * Regex pattern for a YouTube video ID. Google doesn't specify the format of these IDs, but <a
    * href="https://webapps.stackexchange.com/questions/54443/format-for-id-of-youtube-video#answer-101153">reverse-engineering</a>
