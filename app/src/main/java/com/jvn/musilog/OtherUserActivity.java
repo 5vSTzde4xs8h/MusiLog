@@ -103,7 +103,7 @@ public class OtherUserActivity extends AppCompatActivity {
       playlist = new ArrayList<Track>();
     }
 
-    PlaylistAdapter playlistAdapter = new PlaylistAdapter(this, playlist);
+    PlaylistAdapter playlistAdapter = new PlaylistAdapter(this, playlist, true);
     playlistView.setLayoutManager(new LinearLayoutManager(this));
     playlistView.setAdapter(playlistAdapter);
   }

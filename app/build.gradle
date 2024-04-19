@@ -56,7 +56,6 @@ dependencies {
     implementation platform(libs.firebase.bom)
     implementation libs.firebase.firestore
     implementation libs.firebase.auth
-    implementation libs.firebase.ui.auth
 
     implementation(libs.google.api.services.youtube) {
         exclude group: "org.apache.httpcomponents"
