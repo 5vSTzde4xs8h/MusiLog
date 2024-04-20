@@ -218,13 +218,6 @@ public class OtherUserActivity extends AppCompatActivity {
                   return;
                 }
 
-                // set page title
-                ActionBar actionBar = getSupportActionBar();
-
-                if (actionBar != null) {
-                  actionBar.setTitle(String.format("%s's Playlist", user.getDisplayName()));
-                }
-
                 playlistDescriptionView.setText(user.getPlaylistDescription());
                 setupPlaylistView(user.getPlaylist());
               }
