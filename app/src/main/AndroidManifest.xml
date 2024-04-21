@@ -21,6 +21,9 @@
         <activity android:name=".PlaylistEditor"
             android:exported="true"
             android:label="Playlist Editor"/>
+        <activity android:name=".OtherUserActivity"
+            android:exported="true"
+            android:label="OtherUserActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

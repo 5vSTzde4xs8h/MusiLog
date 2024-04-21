@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 
-// Main class
-public class Playlist_Adapter extends RecyclerView.Adapter<playlistVH> {
-    public Playlist_Adapter(List<String> entries) {
+// This class adds the recycle view "activity_entry" to "activity_playlist
+public class EditablePlaylistAdapter extends RecyclerView.Adapter<playlistVH> {
+    public EditablePlaylistAdapter(List<String> entries) {
         this.entries = entries;
     }
 
@@ -37,12 +37,19 @@ public class Playlist_Adapter extends RecyclerView.Adapter<playlistVH> {
     public int getItemCount() {
         return entries.size();
     }
+
+
+
+
+
+
+
 }
 
 // Playlist Viewholder class
 class playlistVH extends RecyclerView.ViewHolder{
     TextView textView;
-    private Playlist_Adapter adapter;
+    private EditablePlaylistAdapter adapter;
 
     public playlistVH(@NonNull View itemView){
         super(itemView);
@@ -51,11 +58,13 @@ class playlistVH extends RecyclerView.ViewHolder{
         itemView.findViewById(R.id.delete_Button).setOnClickListener(view -> {
             adapter.entries.remove(getAdapterPosition());
             adapter.notifyItemRemoved(getAdapterPosition());
-        });
+        })
+        ;
     }
 
-    public playlistVH linkAdapter (Playlist_Adapter adapter){
+    public playlistVH linkAdapter (EditablePlaylistAdapter adapter){
         this.adapter = adapter;
         return this;
     }
+
 }

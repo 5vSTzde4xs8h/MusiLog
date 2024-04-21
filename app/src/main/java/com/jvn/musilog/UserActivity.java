@@ -11,17 +11,24 @@ import java.util.*;
 import java.util.LinkedList;
 import java.util.List;
 
+
+// UserActivtiy class is the homepage of MusiLog
 public class UserActivity extends AppCompatActivity {
+
+    //Created a button variable
     Button editorButton;
 
-
+    //Opens the "activity_user" page
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_user);
 
+        // Sets editorButton as EditPlaylist_Button
         editorButton=(Button)findViewById(R.id.EditPlaylist_Button);
+
+        //When button is clicked, the app will switch from "UserActivity" page to "PlaylistEditor" page
         editorButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
