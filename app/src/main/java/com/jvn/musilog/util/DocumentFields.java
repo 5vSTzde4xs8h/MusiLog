@@ -13,9 +13,6 @@ public final class DocumentFields {
 
   /** Refers to the User object and its corresponding document fields. */
   public static class User {
-    /** Refers to the user's display name. */
-    public static final String DISPLAY_NAME_FIELD = "displayName";
-
     /** Refers to the user's e-mail. */
     public static final String EMAIL_FIELD = "email";
 

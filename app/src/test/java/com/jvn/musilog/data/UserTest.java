@@ -29,9 +29,9 @@ public class UserTest {
     playlist.add(spotifyTrack);
     playlist.add(youTubeTrack);
 
-    User newUser = new User("pbanouvong", playlist, "This is a playlist.");
+    User newUser = new User("johndoe@example.com", playlist, "This is a playlist.");
 
-    assertEquals("pbanouvong", newUser.getDisplayName());
+    assertEquals("johndoe@example.com", newUser.getEmail());
     assertEquals(2, newUser.getPlaylist().size());
     assertEquals("This is a playlist.", newUser.getPlaylistDescription());
   }
@@ -105,10 +105,10 @@ public class UserTest {
   @Test
   public void testDisplayName() {
     User newUser1 = new User(null, null, null);
-    User newUser2 = new User("pbanouvong", null, null);
+    User newUser2 = new User("johndoe@example.com", null, null);
 
-    assertNull(newUser1.getDisplayName());
-    assertNotNull(newUser2.getDisplayName());
+    assertNull(newUser1.getEmail());
+    assertNotNull(newUser2.getEmail());
   }
 
   /** Tests that the playlist is returned properly. */

@@ -30,8 +30,8 @@ public class User {
   /** The description of the user's playlist. */
   private String playlistDescription;
 
-  /** The display name of the user. */
-  private String displayName;
+  /** The email address of the user. */
+  private String email;
 
   /** Default constructor. Required to be public to be used as a custom object in Firestore. */
   public User() {}
@@ -41,12 +41,12 @@ public class User {
    * source is {@link MusicSource#Unknown Unknown}, those tracks will be removed. Additionally, if
    * the playlist contains duplicate tracks, all but one of the duplicate tracks will be removed.
    *
-   * @param displayName The display name of the user
+   * @param email The email address of the user
    * @param playlist The list of {@link Track}s in the user's playlist
    * @param playlistDescription The description of the user's playlist
    */
   public User(
-      String displayName,
+      String email,
       ArrayList<Track> playlist,
       String playlistDescription) {
     if (playlist != null) {
@@ -65,7 +65,7 @@ public class User {
       this.playlist = new ArrayList<Track>(checkedPlaylist);
     }
 
-    this.displayName = displayName;
+    this.email = email;
     this.playlistDescription = playlistDescription;
   }
 
@@ -93,8 +93,8 @@ public class User {
   /**
    * @return The user account's display name
    */
-  @PropertyName(DISPLAY_NAME_FIELD)
-  public String getDisplayName() {
-    return displayName;
+  @PropertyName(EMAIL_FIELD)
+  public String getEmail() {
+    return email;
   }
 }
