@@ -11,36 +11,26 @@
 
         <!-- Switches for settings options -->
         <Switch
-            android:id="@+id/switch_setting"
+            android:id="@+id/switch_background_sync"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Test" />
+            android:text="Background Sync" />
 
         <Switch
             android:id="@+id/switch_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/switch_setting"
+            android:layout_below="@id/switch_background_sync"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
             android:text="Enable Notifications" />
 
         <Switch
-            android:id="@+id/switch_auto_download"
+            android:id="@+id/switch_language"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/switch_notification"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:text="Setting 2" />
-
-        <!-- New switches for additional settings -->
-        <Switch
-            android:id="@+id/switch_background_sync"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/switch_auto_download"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="Language" />
@@ -49,7 +39,7 @@
             android:id="@+id/switch_dark_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/switch_background_sync"
+            android:layout_below="@id/switch_language"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
             android:text="Dark Mode" />

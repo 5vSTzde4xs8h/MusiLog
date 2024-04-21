@@ -1,8 +1,11 @@
 package com.jvn.musilog.util;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -17,28 +20,26 @@ import com.jvn.musilog.R;
 public class SettingsActivity extends AppCompatActivity {
 
     // Switches for various settings options
-    private Switch switchSetting;
-    private Switch switchNotification;
-    private Switch switchAutoDownload;
     private Switch switchBackgroundSync;
+    private Switch switchNotification;
+    private Switch switchLanguage;
     private Switch switchDarkMode;
 
     // SharedPreferences for storing settings state
     private SharedPreferences sharedPreferences;
 
-    /**
-     * Called when the activity is starting. This is where most initialization should go.
-     *
-     * @param savedInstanceState If the activity is being re-initialized after previously being shut down
-     *                           then this Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
-     *                           Note: Otherwise, it is null.
-     */
+    // Logout button
+    private Button btnLogout;
+
+    // Button to redirect to creators information
+    private Button btnCreatorsInfo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // Initialize switches and SharedPreferences
+        // Initialize views and SharedPreferences
         initializeViews();
         sharedPreferences = getSharedPreferences("MySettings", Context.MODE_PRIVATE);
 
@@ -47,33 +48,46 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Set listeners for switch changes
         setSwitchListeners();
+
+        // Set click listener for logout button
+        btnLogout.setOnClickListener(v -> {
+            // Handle logout logic here
+            // (You can add your Firebase logout logic here)
+        });
+
+        // Set click listener for creators info button
+        btnCreatorsInfo.setOnClickListener(v -> {
+            // Redirect the user to the creators information URL
+            String creatorsInfoUrl = "https://github.com/5vSTzde4xs8h/MusiLog/wiki"; // Replace with your URL
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(creatorsInfoUrl));
+            startActivity(browserIntent);
+        });
     }
 
     /**
-     * Initialize switches and set their initial state.
+     * Initialize switches, logout button, and creators info button.
      */
     private void initializeViews() {
-        switchSetting = findViewById(R.id.switch_setting);
-        switchNotification = findViewById(R.id.switch_notification);
-        switchAutoDownload = findViewById(R.id.switch_auto_download);
         switchBackgroundSync = findViewById(R.id.switch_background_sync);
+        switchNotification = findViewById(R.id.switch_notification);
+        switchLanguage = findViewById(R.id.switch_language);
         switchDarkMode = findViewById(R.id.switch_dark_mode);
+        btnLogout = findViewById(R.id.btn_logout);
+        btnCreatorsInfo = findViewById(R.id.btn_about_creators);
     }
 
     /**
      * Load the previous state of the switches from SharedPreferences.
      */
     private void loadPreviousSettings() {
-        boolean isSwitchOn = sharedPreferences.getBoolean("isSwitchOn", false);
-        boolean isNotificationOn = sharedPreferences.getBoolean("isNotificationOn", false);
-        boolean isAutoDownloadOn = sharedPreferences.getBoolean("isAutoDownloadOn", false);
         boolean isBackgroundSyncOn = sharedPreferences.getBoolean("isBackgroundSyncOn", false);
+        boolean isNotificationOn = sharedPreferences.getBoolean("isNotificationOn", false);
+        boolean isLanguageOn = sharedPreferences.getBoolean("isLanguageOn", false);
         boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
-        switchSetting.setChecked(isSwitchOn);
-        switchNotification.setChecked(isNotificationOn);
-        switchAutoDownload.setChecked(isAutoDownloadOn);
         switchBackgroundSync.setChecked(isBackgroundSyncOn);
+        switchNotification.setChecked(isNotificationOn);
+        switchLanguage.setChecked(isLanguageOn);
         switchDarkMode.setChecked(isDarkModeOn);
     }
 
@@ -81,26 +95,17 @@ public class SettingsActivity extends AppCompatActivity {
      * Set listeners for switch changes.
      */
     private void setSwitchListeners() {
-        // Listener for existing switch
-        switchSetting.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isSwitchOn", isChecked));
-
-        // Listeners for new switches
-        switchNotification.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isNotificationOn", isChecked));
-        switchAutoDownload.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isAutoDownloadOn", isChecked));
+        // Listeners for switches
         switchBackgroundSync.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isBackgroundSyncOn", isChecked));
-
+        switchNotification.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isNotificationOn", isChecked));
+        switchLanguage.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isLanguageOn", isChecked));
         switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            // Save state to SharedPreferences
             saveSwitchState("isDarkModeOn", isChecked);
-
-            // Apply dark mode theme if the switch is checked
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
-
-            // Recreate the activity to apply the theme changes
             recreate();
         });
     }
