@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,8 +19,8 @@ import com.jvn.musilog.R;
 public class SettingsActivity extends AppCompatActivity {
 
     // Switches for various settings options
-    private Switch switchBackgroundSync;
     private Switch switchNotification;
+    private Switch switchBackgroundSync;
     private Switch switchLanguage;
     private Switch switchDarkMode;
 
@@ -68,8 +67,8 @@ public class SettingsActivity extends AppCompatActivity {
      * Initialize switches, logout button, and creators info button.
      */
     private void initializeViews() {
-        switchBackgroundSync = findViewById(R.id.switch_background_sync);
         switchNotification = findViewById(R.id.switch_notification);
+        switchBackgroundSync = findViewById(R.id.switch_background_sync);
         switchLanguage = findViewById(R.id.switch_language);
         switchDarkMode = findViewById(R.id.switch_dark_mode);
         btnLogout = findViewById(R.id.btn_logout);
@@ -80,13 +79,13 @@ public class SettingsActivity extends AppCompatActivity {
      * Load the previous state of the switches from SharedPreferences.
      */
     private void loadPreviousSettings() {
-        boolean isBackgroundSyncOn = sharedPreferences.getBoolean("isBackgroundSyncOn", false);
         boolean isNotificationOn = sharedPreferences.getBoolean("isNotificationOn", false);
+        boolean isBackgroundSyncOn = sharedPreferences.getBoolean("isBackgroundSyncOn", false);
         boolean isLanguageOn = sharedPreferences.getBoolean("isLanguageOn", false);
         boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 
-        switchBackgroundSync.setChecked(isBackgroundSyncOn);
         switchNotification.setChecked(isNotificationOn);
+        switchBackgroundSync.setChecked(isBackgroundSyncOn);
         switchLanguage.setChecked(isLanguageOn);
         switchDarkMode.setChecked(isDarkModeOn);
     }
@@ -96,16 +95,21 @@ public class SettingsActivity extends AppCompatActivity {
      */
     private void setSwitchListeners() {
         // Listeners for switches
-        switchBackgroundSync.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isBackgroundSyncOn", isChecked));
         switchNotification.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isNotificationOn", isChecked));
+        switchBackgroundSync.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isBackgroundSyncOn", isChecked));
         switchLanguage.setOnCheckedChangeListener((buttonView, isChecked) -> saveSwitchState("isLanguageOn", isChecked));
         switchDarkMode.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            // Save state to SharedPreferences
             saveSwitchState("isDarkModeOn", isChecked);
+
+            // Apply dark mode theme if the switch is checked
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
+
+            // Recreate the activity to apply the theme changes
             recreate();
         });
     }
