@@ -54,7 +54,7 @@
             android:layout_marginTop="16dp"
             android:text="Logout" />
 
-        <!--About the Creators -->
+        <!--Creators -->
         <Button
             android:id="@+id/btn_about_creators"
             android:layout_width="wrap_content"
