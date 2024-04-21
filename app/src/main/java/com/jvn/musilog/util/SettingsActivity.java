@@ -51,7 +51,7 @@ public class SettingsActivity extends AppCompatActivity {
         // Set click listener for logout button
         btnLogout.setOnClickListener(v -> {
             // Handle logout logic here
-            // (You can add your Firebase logout logic here)
+           
         });
 
         // Set click listener for creators info button
