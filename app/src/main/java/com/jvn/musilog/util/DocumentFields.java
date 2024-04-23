@@ -16,6 +16,8 @@ public final class DocumentFields {
     /** Refers to the user's e-mail. */
     public static final String EMAIL_FIELD = "email";
 
+    public static final String USERNAME_FIELD = "username";
+
     /** Refers to the user's playlist. */
     public static final String PLAYLIST_FIELD = "playlist";
 
