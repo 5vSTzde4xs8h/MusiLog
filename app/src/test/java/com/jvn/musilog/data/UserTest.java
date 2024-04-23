@@ -32,6 +32,7 @@ public class UserTest {
     User newUser = new User("johndoe@example.com", "johndoe", playlist, "This is a playlist.");
 
     assertEquals("johndoe@example.com", newUser.getEmail());
+    assertEquals("johndoe", newUser.getUsername());
     assertEquals(2, newUser.getPlaylist().size());
     assertEquals("This is a playlist.", newUser.getPlaylistDescription());
   }
