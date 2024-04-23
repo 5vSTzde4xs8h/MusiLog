@@ -10,6 +10,9 @@ import android.content.pm.PackageManager;
  * @since 2024-03-16
  */
 public class AppAvailability {
+  /** Private default constructor to prevent object creation. */
+  private AppAvailability() {}
+
   /**
    * Checks if an app is installed.
    *
@@ -18,7 +21,7 @@ public class AppAvailability {
    * @param packageId The ID of the app to look up
    * @return A boolean telling if the app is installed
    */
-  private static boolean isAppAvailable(Context context, String packageId) {
+  public static boolean isAppAvailable(Context context, String packageId) {
     PackageManager packageManager = context.getPackageManager();
 
     try {

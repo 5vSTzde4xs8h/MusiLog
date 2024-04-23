@@ -30,23 +30,28 @@ import se.michaelthelin.spotify.requests.data.tracks.GetTrackRequest;
  */
 public class TrackMetadata {
   /** The title of the music track. */
-  private final String title;
+  private String title;
 
   /** The list of artists for the music track. */
-  private final String artistLine;
+  private String artistLine;
 
   /** The cover art URL for the music track. */
-  private final String coverArtUrl;
+  private String coverArtUrl;
 
-  /** Private default constructor. Use {@link TrackMetadata#fromMusicSource} instead. */
-  private TrackMetadata() {
-    this.title = "";
-    this.artistLine = "";
-    this.coverArtUrl = "";
-  }
+  /**
+   * Default constructor. Use {@link TrackMetadata#TrackMetadata(String, String, String)} or {@link
+   * TrackMetadata#fromMusicSource} instead.
+   */
+  private TrackMetadata() {}
 
-  /** Private qualified constructor. Use {@link TrackMetadata#fromMusicSource} instead. */
-  private TrackMetadata(String title, String artistLine, String coverArtUrl) {
+  /**
+   * Qualified constructor.
+   *
+   * @param title The title of the music track
+   * @param artistLine The list of artists for the music track
+   * @param coverArtUrl A URL to a covert art image for the music track
+   */
+  public TrackMetadata(String title, String artistLine, String coverArtUrl) {
     this.title = title;
     this.artistLine = artistLine;
     this.coverArtUrl = coverArtUrl;
@@ -54,10 +59,10 @@ public class TrackMetadata {
 
   /**
    * Creates {@link TrackMetadata} from a Spotify music track. If there's a problem retrieving the
-   * metadata, a {@link TrackMetadata} with no information will be returned.
+   * metadata, {@code null} will be returned.
    *
    * @param sourceId The Spotify track ID
-   * @return A {@link TrackMetadata} describing the music track
+   * @return A {@link TrackMetadata} describing the music track, which may be {@code null}
    */
   private static TrackMetadata fromSpotify(String sourceId) {
     /*
@@ -67,7 +72,7 @@ public class TrackMetadata {
     SpotifyApi api = ApiProvider.getSpotifyApi();
 
     if (api == null) {
-      return new TrackMetadata();
+      return null;
     }
 
     try {
@@ -92,17 +97,17 @@ public class TrackMetadata {
       return new TrackMetadata(
           trackResponse.getName(), artistLine.toString(), albumCoverArtUrls[0].getUrl());
     } catch (IOException | SpotifyWebApiException | ParseException except) {
-      return new TrackMetadata();
+      return null;
     }
   }
 
   /**
    * Creates {@link TrackMetadata} from a YouTube music track. Note that this method doesn't verify
    * that the provided video ID is in fact for a music track. If there's a problem retrieving the
-   * metadata, a {@link TrackMetadata} with no information will be returned.
+   * metadata, {@code null} will be returned.
    *
    * @param sourceId The YouTube track ID
-   * @return A {@link TrackMetadata} describing the music track
+   * @return A {@link TrackMetadata} describing the music track, which may be {@code null}
    */
   private static TrackMetadata fromYouTube(String sourceId) {
     /*
@@ -112,7 +117,7 @@ public class TrackMetadata {
     YouTube api = ApiProvider.getYoutubeApi();
 
     if (api == null) {
-      return new TrackMetadata();
+      return null;
     }
 
     List<String> videoParts = List.of("snippet");
@@ -128,7 +133,7 @@ public class TrackMetadata {
       List<Video> videos = videosResponse.getItems();
 
       if (videos.isEmpty()) {
-        return new TrackMetadata();
+        return null;
       } else {
         Video video = videos.get(0);
         VideoSnippet videoSnippet = video.getSnippet();
@@ -141,18 +146,18 @@ public class TrackMetadata {
       }
     } catch (IOException
         | NullPointerException except) { // many of the API calls can return null values
-      return new TrackMetadata();
+      return null;
     }
   }
 
   /**
    * Creates {@link TrackMetadata} from a music source and ID. If the music source is {@link
-   * MusicSource#Unknown}, or there's a problem retrieving the metadata, a {@link TrackMetadata}
-   * with no information will be returned.
+   * MusicSource#Unknown Unknown}, or there's a problem retrieving the metadata, {@code null} will
+   * be returned.
    *
    * @param source The {@link MusicSource} to get the metadata from
    * @param sourceId The music track ID
-   * @return A {@link TrackMetadata} describing the music track
+   * @return A {@link TrackMetadata} describing the music track, which may be {@code null}
    */
   public static TrackMetadata fromMusicSource(MusicSource source, String sourceId) {
     switch (source) {
@@ -161,7 +166,7 @@ public class TrackMetadata {
       case YouTube:
         return fromYouTube(sourceId);
       default:
-        return new TrackMetadata();
+        return null;
     }
   }
 
