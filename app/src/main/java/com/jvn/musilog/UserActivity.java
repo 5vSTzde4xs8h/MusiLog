@@ -43,7 +43,6 @@ public class UserActivity extends AppCompatActivity {
           public void onClick(View view) {
             Intent intent = new Intent(UserActivity.this, PlaylistEditor.class);
             startActivity(intent);
-
           }
         });
   }
