@@ -21,50 +21,44 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.925" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Email_Layout"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="356dp"
+
+    <EditText
+        android:id="@+id/Email_Registeration"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
         android:hint="@string/Email_string"
-        app:layout_constraintBottom_toTopOf="@+id/MainActivityButton"
+        android:importantForAutofill="no"
+        android:inputType="text|textEmailAddress"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58"
+        tools:ignore="LabelFor,TextContrastCheck" />
+
+
+
+    <EditText
+        android:id="@+id/password_Registation"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
+        android:hint="@string/Password_string"
+        android:importantForAutofill="no"
+        android:inputType="text|textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.076">
+        app:layout_constraintVertical_bias="0.687"
+        tools:ignore="LabelFor,TextContrastCheck"  />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="text"
-            android:textColor="#000000"
-            android:textColorHint="#01579B"
-            android:textColorLink="#000000"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Password_Layout"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="208dp"
-        android:hint="@string/Password_string"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#000000"
-            android:textColorHint="#01579B"
-            android:textColorLink="#000000"
-            tools:ignore="TextContrastCheck" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/register_button"

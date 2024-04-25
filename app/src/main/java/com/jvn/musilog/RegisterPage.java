@@ -1,8 +1,10 @@
 package com.jvn.musilog;
 
-import android.content.Context;
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,23 +17,34 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import org.checkerframework.checker.nullness.qual.NonNull;
+
+/**
+ *  RegisterPage.java creates a new account using email and password.
+ */
 
 public class RegisterPage extends AppCompatActivity {
-Button MainButton, RegisterButton;
+  /*
+  * The following lines creates a button and EditText objects
+  * */
+  Button MainButton, RegisterButton;
+  EditText inputEmail, inputPassword;
 
-TextInputEditText inputEmail, inputPassword;
+  //This creates the firebase authentication object.
+  FirebaseAuth mAuth;
 
-FirebaseAuth mAuth;
-
+  /*
+  * The following OnCreate allows the user to create an account using Email and Password
+  * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 
-    // Object Declarations
-    mAuth = FirebaseAuth.getInstance();
-    inputEmail = findViewById(R.id.Email);
-    inputPassword = findViewById(R.id.password);
     super.onCreate(savedInstanceState);
     EdgeToEdge.enable(this);
     setContentView(R.layout.activity_register_page);
@@ -43,75 +56,67 @@ FirebaseAuth mAuth;
           return insets;
         });
 
-      /*
-      This section is a button to go to the main activity page
-       */
+    /*
+    This section assigns the Button and
+    returns the user to the main activity which is the first page of the application.
+     */
     MainButton = findViewById(R.id.MainActivityButton);
-    MainButton.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
+    MainButton.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
+          } // this ends bracket for ONclick
+        });
 
-        } // this ends bracket for ONclick
+    // Object Declarations
+    // EditText and Button
+    mAuth = FirebaseAuth.getInstance();
+    inputEmail = findViewById(R.id.Email_Registeration);
+    inputPassword = findViewById(R.id.password_Registation);
 
-    }); //MAINBUTTON onClicklistner for the "main button" test below this line
-      //RegisterButton = findViewById(R.id.register_button);
-      //EditText text = (EditText)findViewById(R.id.TextEmailAddress);
-     // String value = String.valueOf(inputEmail.getText());
-      String value = "hello";
-      RegisterButton = findViewById(R.id.register_button);
-      RegisterButton.setOnClickListener(v -> Toast.makeText(RegisterPage.this, "Hello", Toast.LENGTH_SHORT).show());
-      System.out.println(value);
-/*
-      RegisterButton.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            //start
-              String email ,password;
-              email = String.valueOf(inputEmail.getText());
-              password = String.valueOf(inputPassword.getText());
+    RegisterButton = findViewById(R.id.register_button);
+    // This creates an Onclick lister to grab the strings placed inside the EditText,
+    // check bounds and use the firebase function to create a new account with an email and password.
+    RegisterButton.setOnClickListener(
+        v -> {
+          String UserEmail, UserPassword;
+          UserEmail = String.valueOf(inputEmail.getText());
+          UserPassword = String.valueOf(inputPassword.getText());
 
-              if ( TextUtils.isEmpty(email) ){
-                  Toast.makeText(RegisterPage.this,
-                          "Email or Password is empty", Toast.LENGTH_SHORT).show();
-              }
-              if (TextUtils.isEmpty(password) ){
-                  Toast.makeText(RegisterPage.this,
-                          "Email or Password is empty", Toast.LENGTH_SHORT).show();
-              }
+            if(TextUtils.isEmpty(UserEmail) || (TextUtils.isEmpty(UserPassword))){
+                Toast.makeText(RegisterPage.this,"Email/Password is empty",Toast.LENGTH_SHORT).show();
+            return;
+            }
 
-              mAuth.createUserWithEmailAndPassword(email, password)
-                      .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                          @Override
-                          public void onComplete(@NonNull Task<AuthResult> task) {
-                              if (task.isSuccessful()) {
-                                  // Sign in success, update UI with the signed-in user's information
-                                  Log.d(TAG, "createUserWithEmail:success");
-                                  Toast.makeText(RegisterPage.this, "Authentication Successful.",
-                                          Toast.LENGTH_SHORT).show();
-                                  FirebaseUser user = mAuth.getCurrentUser();
+            mAuth
+              .createUserWithEmailAndPassword(UserEmail, UserPassword)
+              .addOnCompleteListener(
+                  new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                      if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        Log.d(TAG, "createUserWithEmail:success");
+                        Toast.makeText(
+                                RegisterPage.this, "Authentication Successful.", Toast.LENGTH_SHORT)
+                            .show();
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        Intent intent = new Intent(getApplicationContext(), Landing_page.class);
+                        startActivity(intent);
+                        finish();
 
-                              } else {
-                                  // If sign in fails, display a message to the user.
-                                  Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                  Toast.makeText(RegisterPage.this, "Authentication failed.",
-                                          Toast.LENGTH_SHORT).show();
-
-                              }
-                          }
-                      });
-
-
-
-          }//onCLICK
-      });//end of registerButton
-*/
-
-
-
-
-
-  }// end of ON create class
-} //end of class
+                      } else {
+                        // If sign in fails, display a message to the user.
+                        Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                        Toast.makeText(
+                                RegisterPage.this, "Authentication failed.", Toast.LENGTH_SHORT)
+                            .show();
+                      }
+                    }
+                  });
+        });
+  } // end of ON create class
+} // end of class

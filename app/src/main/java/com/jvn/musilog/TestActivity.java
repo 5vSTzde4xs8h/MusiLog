@@ -1,12 +1,11 @@
 package com.jvn.musilog;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,12 +15,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuth.IdTokenListener;
 
 public class TestActivity extends AppCompatActivity {
-    Button LogOut;
-    FirebaseAuth auth;
-    EditText test;
+    Button LogOut, deleteAccount;
+    EditText test , passwordTest;
     TextInputEditText INPUT;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -38,18 +35,22 @@ public class TestActivity extends AppCompatActivity {
    //String emailTEST;
    test = findViewById(R.id.editText);
    INPUT = findViewById(R.id.TEXTINPUT);
-
+   passwordTest = findViewById(R.id.editTextPassword);
   // emailTEST   = test.getText().toString();
-   LogOut = findViewById(R.id.Log_outButton);
+   LogOut = findViewById(R.id.Log_outButtonTest);
     LogOut.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String emailTEST, input_text;
+            String emailTEST, input_text , passwordTEST;
             emailTEST   = test.getText().toString();
             input_text = INPUT.getText().toString();
+            passwordTEST = passwordTest.getText().toString();
             System.out.println(emailTEST);
-
+            System.out.println(passwordTEST);
             System.out.println(input_text);
+            if(TextUtils.isEmpty(input_text)){
+                Toast.makeText(TestActivity.this,"This is empty",Toast.LENGTH_LONG).show();
+            }
             // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             //startActivity(intent);
             //finish();
@@ -58,7 +59,22 @@ public class TestActivity extends AppCompatActivity {
         }
     });
 
-
-
   }
 }
+
+              /*
+            String emailTEST, passwordTEST;
+            emailTEST = String.valueOf(inputEmail.getText());
+            passwordTEST = String.valueOf(inputPassword.getText());
+            System.out.println(emailTEST);
+            System.out.println(passwordTEST);
+              if(TextUtils.isEmpty(emailTEST)){
+                  Toast.makeText(Login.this,"Email is empty",Toast.LENGTH_LONG).show();
+              }
+              if(TextUtils.isEmpty(passwordTEST)){
+                  Toast.makeText(Login.this,"Password is empty",Toast.LENGTH_LONG).show();
+              }
+               */
+
+//                                  //userID[0] = String.valueOf(user);
+//                                  final String[] userID = new String[1];

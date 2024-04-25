@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Base.Theme.MusiLog"
     tools:context=".TestActivity">
 
     <TextView
@@ -18,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Log_outButton"
+        android:id="@+id/Log_outButtonTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/log_out"
@@ -57,29 +58,35 @@
         app:layout_constraintVertical_bias="0.395"
         tools:ignore="TextContrastCheck" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.77">
-
-    </com.google.android.material.textfield.TextInputLayout>
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/TEXTINPUT"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="373dp"
+        android:layout_height="53dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.9" />
+        app:layout_constraintVertical_bias="0.901"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#2196F3"
+        android:ems="10"
+        android:foregroundTint="#5DB2F6"
+        android:hint="@string/Password_string"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:textColorHint="#546E7A"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.755" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -28,6 +28,8 @@
     <string name="TODO"> id = "@+id/Email_Hint" </string>
     <string name="this_is_a_test">THIS IS A TEST</string>
     <string name="log_out">Log Out</string>
+    <string name="deleteUser">Delete Account</string>
+    <string name="resetPassword">Reset Password</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
