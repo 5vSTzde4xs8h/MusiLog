@@ -28,7 +28,7 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 /** RegisterPage.java creates a new account using email and password. */
 public class RegisterPage extends AppCompatActivity {
   /*
-   * The following lines creates a button and EditText objects
+   * The following lines creates a button and EditText objects!
    * */
   Button MainButton, RegisterButton;
   EditText inputEmail, inputPassword;

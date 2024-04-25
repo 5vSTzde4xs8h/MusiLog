@@ -50,7 +50,7 @@ public class TestActivity extends AppCompatActivity {
             System.out.println(passwordTEST);
             System.out.println(input_text);
             if (TextUtils.isEmpty(input_text)) {
-              Toast.makeText(TestActivity.this, "This is empty", Toast.LENGTH_LONG).show();
+              Toast.makeText(TestActivity.this, "This is empty!", Toast.LENGTH_LONG).show();
             }
             // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             // startActivity(intent);
