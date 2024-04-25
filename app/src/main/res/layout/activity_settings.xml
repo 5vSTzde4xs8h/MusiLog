@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SettingsActivity">
+
+        <!-- Switches for settings options -->
+        <Switch
+            android:id="@+id/switch_background_sync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Background Sync" />
+
+        <Switch
+            android:id="@+id/switch_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switch_background_sync"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:text="Enable Notifications" />
+
+        <Switch
+            android:id="@+id/switch_language"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switch_notification"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Language" />
+
+        <Switch
+            android:id="@+id/switch_dark_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switch_language"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"
+            android:text="Dark Mode" />
+
+        <!-- Logout button -->
+        <Button
+            android:id="@+id/btn_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/switch_dark_mode"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Logout" />
+
+        <!--Creators -->
+        <Button
+            android:id="@+id/btn_about_creators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_logout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="About Creators" />
+        <!-- Reset Password button -->
+        <Button
+            android:id="@+id/resetPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_about_creators"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Reset Password" />
+        <!-- Change Email button -->
+        <Button
+            android:id="@+id/changeEmailButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/resetPasswordButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Change Email" />
+
+
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
