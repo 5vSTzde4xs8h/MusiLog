@@ -37,6 +37,7 @@ public class UserActivity extends AppCompatActivity {
 
     /** When button is clicked, the app will switch from "UserActivity" page to "PlaylistEditor"
      *  page */
+
     editorButton.setOnClickListener(
         new View.OnClickListener() {
           @Override
