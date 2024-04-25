@@ -1,27 +1,22 @@
 package com.jvn.musilog;
-
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import java.net.URI;
-
+/**
+ * The type Main activity.
+ *
+ */
 public class MainActivity extends AppCompatActivity {
 
+  /** The Main activity button object declarations. */
   Button MainActivity_RegisterButton, MainActivity_LoginButton;
-  FirebaseAuth mAuth;
-
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,28 +30,27 @@ public class MainActivity extends AppCompatActivity {
           v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
           return insets;
         });
-
+/*
+ * MainActivity Register Button slows the user the registration Page
+ *
+ */
     MainActivity_RegisterButton = findViewById(R.id.GOTOregister_button);
     MainActivity_RegisterButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), RegisterPage.class);
-            startActivity(intent);
-            finish();
-          }
+        v -> {
+          Intent intent = new Intent(getApplicationContext(), RegisterPage.class);
+          startActivity(intent);
+          finish();
         });
-
+/*
+ * MainActivity Login Button slows the user the Login Page
+ *
+ */
     MainActivity_LoginButton = findViewById(R.id.GOTOLogin_button);
     MainActivity_LoginButton.setOnClickListener(
-        new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            Intent intent = new Intent(getApplicationContext(), Login.class);
-            startActivity(intent);
-            finish();
-          }
+        v -> {
+          Intent intent = new Intent(getApplicationContext(), Login.class);
+          startActivity(intent);
+          finish();
         });
-
   }
 }

@@ -44,10 +44,10 @@
         app:layout_constraintVertical_bias="0.137" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/TestUserName"
         android:layout_width="298dp"
         android:layout_height="48dp"
-        android:hint="@string/Login"
+        android:hint="Username"
         android:importantForAutofill="no"
         android:inputType="textWebEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"

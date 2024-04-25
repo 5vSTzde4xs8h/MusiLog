@@ -14,12 +14,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class TestActivity extends AppCompatActivity {
-    Button LogOut, deleteAccount;
-    EditText test , passwordTest;
-    TextInputEditText INPUT;
+  Button LogOut, deleteAccount;
+  EditText test, passwordTest;
+  TextInputEditText INPUT;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -32,49 +32,49 @@ public class TestActivity extends AppCompatActivity {
           v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
           return insets;
         });
-   //String emailTEST;
-   test = findViewById(R.id.editText);
-   INPUT = findViewById(R.id.TEXTINPUT);
-   passwordTest = findViewById(R.id.editTextPassword);
-  // emailTEST   = test.getText().toString();
-   LogOut = findViewById(R.id.Log_outButtonTest);
-    LogOut.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String emailTEST, input_text , passwordTEST;
-            emailTEST   = test.getText().toString();
+    // String emailTEST;
+    test = findViewById(R.id.TestUserName);
+    INPUT = findViewById(R.id.TEXTINPUT);
+    passwordTest = findViewById(R.id.editTextPassword);
+    // emailTEST   = test.getText().toString();
+    LogOut = findViewById(R.id.Log_outButtonTest);
+    LogOut.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            String emailTEST, input_text, passwordTEST;
+            emailTEST = test.getText().toString();
             input_text = INPUT.getText().toString();
             passwordTEST = passwordTest.getText().toString();
             System.out.println(emailTEST);
             System.out.println(passwordTEST);
             System.out.println(input_text);
-            if(TextUtils.isEmpty(input_text)){
-                Toast.makeText(TestActivity.this,"This is empty",Toast.LENGTH_LONG).show();
+            if (TextUtils.isEmpty(input_text)) {
+              Toast.makeText(TestActivity.this, "This is empty", Toast.LENGTH_LONG).show();
             }
             // Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            //startActivity(intent);
-            //finish();
-            //FirebaseAuth.getInstance().getCurrentUser();
-            //FirebaseAuth.getInstance().signOut();
-        }
-    });
-
+            // startActivity(intent);
+            // finish();
+            // FirebaseAuth.getInstance().getCurrentUser();
+            // FirebaseAuth.getInstance().signOut();
+          }
+        });
   }
 }
 
               /*
-            String emailTEST, passwordTEST;
-            emailTEST = String.valueOf(inputEmail.getText());
-            passwordTEST = String.valueOf(inputPassword.getText());
-            System.out.println(emailTEST);
-            System.out.println(passwordTEST);
-              if(TextUtils.isEmpty(emailTEST)){
-                  Toast.makeText(Login.this,"Email is empty",Toast.LENGTH_LONG).show();
-              }
-              if(TextUtils.isEmpty(passwordTEST)){
-                  Toast.makeText(Login.this,"Password is empty",Toast.LENGTH_LONG).show();
-              }
-               */
+              String emailTEST, passwordTEST;
+              emailTEST = String.valueOf(inputEmail.getText());
+              passwordTEST = String.valueOf(inputPassword.getText());
+              System.out.println(emailTEST);
+              System.out.println(passwordTEST);
+                if(TextUtils.isEmpty(emailTEST)){
+                    Toast.makeText(Login.this,"Email is empty",Toast.LENGTH_LONG).show();
+                }
+                if(TextUtils.isEmpty(passwordTEST)){
+                    Toast.makeText(Login.this,"Password is empty",Toast.LENGTH_LONG).show();
+                }
+                 */
 
 //                                  //userID[0] = String.valueOf(user);
 //                                  final String[] userID = new String[1];

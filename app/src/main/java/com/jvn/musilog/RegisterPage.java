@@ -25,23 +25,20 @@ import com.google.firebase.auth.FirebaseUser;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
-/**
- *  RegisterPage.java creates a new account using email and password.
- */
-
+/** RegisterPage.java creates a new account using email and password. */
 public class RegisterPage extends AppCompatActivity {
   /*
-  * The following lines creates a button and EditText objects
-  * */
+   * The following lines creates a button and EditText objects
+   * */
   Button MainButton, RegisterButton;
   EditText inputEmail, inputPassword;
 
-  //This creates the firebase authentication object.
+  // This creates the firebase authentication object.
   FirebaseAuth mAuth;
 
   /*
-  * The following OnCreate allows the user to create an account using Email and Password
-  * */
+   * The following OnCreate allows the user to create an account using Email and Password
+   * */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 
@@ -74,24 +71,25 @@ public class RegisterPage extends AppCompatActivity {
     // Object Declarations
     // EditText and Button
     mAuth = FirebaseAuth.getInstance();
-    inputEmail = findViewById(R.id.Email_Registeration);
+    inputEmail = findViewById(R.id.Email_Registation);
     inputPassword = findViewById(R.id.password_Registation);
 
     RegisterButton = findViewById(R.id.register_button);
     // This creates an Onclick lister to grab the strings placed inside the EditText,
-    // check bounds and use the firebase function to create a new account with an email and password.
+    // check bounds and use the firebase function to create a new account with an email and
+    // password.
     RegisterButton.setOnClickListener(
         v -> {
           String UserEmail, UserPassword;
           UserEmail = String.valueOf(inputEmail.getText());
           UserPassword = String.valueOf(inputPassword.getText());
 
-            if(TextUtils.isEmpty(UserEmail) || (TextUtils.isEmpty(UserPassword))){
-                Toast.makeText(RegisterPage.this,"Email/Password is empty",Toast.LENGTH_SHORT).show();
+          if (TextUtils.isEmpty(UserEmail) || (TextUtils.isEmpty(UserPassword))) {
+            Toast.makeText(RegisterPage.this, "Email/Password is empty", Toast.LENGTH_SHORT).show();
             return;
-            }
+          }
 
-            mAuth
+          mAuth
               .createUserWithEmailAndPassword(UserEmail, UserPassword)
               .addOnCompleteListener(
                   new OnCompleteListener<AuthResult>() {
