@@ -63,6 +63,26 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="About Creators" />
+        <!-- Reset Password button -->
+        <Button
+            android:id="@+id/resetPasswordButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_about_creators"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Reset Password" />
+        <!-- Change Email button -->
+        <Button
+            android:id="@+id/changeEmailButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/resetPasswordButton"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:text="Change Email" />
+
+
 
     </RelativeLayout>
 
