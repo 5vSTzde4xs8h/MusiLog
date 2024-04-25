@@ -21,8 +21,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlist"
         android:layout_width="0dp"
-        android:layout_height="420dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        android:layout_marginVertical="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/about"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tracks" />
@@ -32,42 +33,41 @@
         style="@style/Widget.MaterialRatingBar.RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ratingText" />
+        android:layout_marginBottom="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/playlistDescription"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/about"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/about"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/playlist" />
+        app:layout_constraintBottom_toTopOf="@+id/ratingText"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/playlistDescription"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:maxLines="4"
         android:scrollbars="vertical"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userRating"
         tools:text="This is a playlist.\nThis is a description of the playlist.\nHere are more lines of text.\nPlaceholder." />
 
     <TextView
         android:id="@+id/ratingText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:text="@string/average_rating"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/userRating"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

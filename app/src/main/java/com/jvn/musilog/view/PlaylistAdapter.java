@@ -24,12 +24,15 @@ import java.util.ArrayList;
  * @since 2024-04-06
  */
 // https://developer.android.com/develop/ui/views/layout/recyclerview
-public class PlaylistAdapter extends RecyclerView.Adapter<PlayableTrackViewHolder> {
+public class PlaylistAdapter extends RecyclerView.Adapter<TrackViewHolder> {
   /** The playlist that will be rendered. */
   private final ArrayList<Track> playlist;
 
   /** The Activity the adapter is running under. */
   private final AppCompatActivity activity;
+
+  /** If the play buttons for each track should be shown. */
+  private final boolean showPlayButtons;
 
   /**
    * Creates a new PlaylistAdapter.
@@ -37,9 +40,10 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlayableTrackViewHolde
    * @param activity The activity the adapter is running under
    * @param playlist The playlist to render
    */
-  public PlaylistAdapter(AppCompatActivity activity, ArrayList<Track> playlist) {
+  public PlaylistAdapter(AppCompatActivity activity, ArrayList<Track> playlist, boolean showPlayButtons) {
     this.activity = activity;
     this.playlist = playlist;
+    this.showPlayButtons = showPlayButtons;
   }
 
   /**
@@ -60,11 +64,11 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlayableTrackViewHolde
    */
   @NonNull
   @Override
-  public PlayableTrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+  public TrackViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
     View view =
-        LayoutInflater.from(parent.getContext()).inflate(R.layout.playable_track, parent, false);
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.playlist_item, parent, false);
 
-    return new PlayableTrackViewHolder(activity, view);
+    return new TrackViewHolder(activity, view);
   }
 
   /**
@@ -75,7 +79,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlayableTrackViewHolde
    * @param position The position of the item within the adapter's data set.
    */
   @Override
-  public void onBindViewHolder(@NonNull PlayableTrackViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull TrackViewHolder holder, int position) {
     Track track = playlist.get(position);
 
     // the handler allows us to dispatch UI updates to the main thread, the only thread where UI
@@ -98,12 +102,16 @@ public class PlaylistAdapter extends RecyclerView.Adapter<PlayableTrackViewHolde
                       @Override
                       public void run() {
                         TrackMetadata thisMetadata;
+                        boolean forceHidePlayButtons = false;
 
                         if (metadata == null) {
                           thisMetadata = new TrackMetadata("(Unknown)", "(Unknown)", null);
-                          holder.setupPlayButton(MusicSource.Unknown, null);
+                          forceHidePlayButtons = true;
                         } else {
                           thisMetadata = metadata;
+                        }
+
+                        if (showPlayButtons && !forceHidePlayButtons) {
                           holder.setupPlayButton(track.getSource(), track.getSourceId());
                         }
 

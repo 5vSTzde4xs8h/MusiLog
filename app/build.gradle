@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.secrets)
     alias(libs.plugins.googleServices)
-
 }
 
 java {
@@ -38,15 +37,10 @@ android {
 
     buildFeatures {
         buildConfig true
-        viewBinding true
     }
 
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -55,9 +49,6 @@ dependencies {
     implementation libs.material
     implementation libs.activity
     implementation libs.constraintlayout
-    implementation libs.navigation.fragment
-    implementation libs.navigation.ui
-    implementation libs.firebase.inappmessaging
     testImplementation libs.junit
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
@@ -66,7 +57,6 @@ dependencies {
     implementation libs.firebase.firestore
     implementation libs.firebase.auth
     implementation libs.firebase.ui.auth
-   // implementation libs.firebase.bom.v3281
 
     implementation(libs.google.api.services.youtube) {
         exclude group: "org.apache.httpcomponents"

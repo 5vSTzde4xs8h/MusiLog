@@ -146,7 +146,7 @@ public class OtherUserActivity extends AppCompatActivity {
     setContentView(R.layout.activity_other_user);
 
     ViewCompat.setOnApplyWindowInsetsListener(
-        findViewById(R.id.RegisterPage),
+        findViewById(R.id.main),
         (v, insets) -> {
           Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
           v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -294,7 +294,7 @@ public class OtherUserActivity extends AppCompatActivity {
                         thisUserRatingBar.setRating(lastRating);
 
                         Snackbar.make(
-                                findViewById(R.id.RegisterPage),
+                                findViewById(R.id.main),
                                 R.string.rating_set_error,
                                 BaseTransientBottomBar.LENGTH_LONG)
                             .show();

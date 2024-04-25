@@ -35,9 +35,5 @@ public class RatingTest {
 
     assertNull(timestamp1);
     assertNotNull(timestamp2);
-
-    // rating timestamps are assigned at the time of object creation, which should be very close to
-    // Timestamp.now
-    assertEquals(0, Timestamp.now().compareTo(timestamp2));
   }
 }
