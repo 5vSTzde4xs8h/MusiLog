@@ -47,9 +47,9 @@ public class Login extends AppCompatActivity {
           return insets;
         });
 
-    inputEmail = findViewById(R.id.Email_Registeration);
-    inputPassword = findViewById(R.id.password_Registation);
-    MainButton = findViewById(R.id.MainActivityButton2);
+    inputEmail = findViewById(R.id.Email_Login);
+    inputPassword = findViewById(R.id.password_Login);
+    MainButton = findViewById(R.id.ReturnButton);
     MainButton.setOnClickListener(
         new View.OnClickListener() {
           @Override

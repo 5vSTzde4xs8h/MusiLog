@@ -9,7 +9,7 @@
     tools:context=".Login">
 
     <Button
-        android:id="@+id/MainActivityButton2"
+        android:id="@+id/ReturnButton"
         android:layout_width="121dp"
         android:layout_height="52dp"
         android:text="@string/Return"
@@ -21,7 +21,7 @@
         app:layout_constraintVertical_bias="0.927" />
 
     <EditText
-        android:id="@+id/Email_Registeration"
+        android:id="@+id/Email_Login"
         android:layout_width="374dp"
         android:layout_height="48dp"
         android:hint="@string/Email_string"
@@ -39,7 +39,7 @@
         tools:ignore="LabelFor,TextContrastCheck" />
 
     <EditText
-        android:id="@+id/password_Registation"
+        android:id="@+id/password_Login"
         android:layout_width="374dp"
         android:layout_height="48dp"
         android:hint="@string/Password_string"

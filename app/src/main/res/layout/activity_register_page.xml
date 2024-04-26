@@ -43,7 +43,7 @@
 
 
     <EditText
-        android:id="@+id/password_Registation"
+        android:id="@+id/password_Login"
         android:layout_width="374dp"
         android:layout_height="48dp"
         android:hint="@string/Password_string"

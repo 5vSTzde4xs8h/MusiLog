@@ -73,7 +73,7 @@ public class RegisterPage extends AppCompatActivity {
     // EditText and Button
     mAuth = FirebaseAuth.getInstance();
     inputEmail = findViewById(R.id.Email_Registation);
-    inputPassword = findViewById(R.id.password_Registation);
+    inputPassword = findViewById(R.id.password_Login);
 
     RegisterButton = findViewById(R.id.register_button);
     // This creates an Onclick lister to grab the strings placed inside the EditText,
