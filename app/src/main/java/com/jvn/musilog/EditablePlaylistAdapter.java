@@ -1,70 +1,129 @@
 package com.jvn.musilog;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
-
+import android.content.Context;
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
 
-import java.util.List;
+import com.jvn.musilog.data.TrackMetadata;
+import com.jvn.musilog.R;
+import com.jvn.musilog.data.MusicSource;
+import com.jvn.musilog.data.Track;
 
+/** This activity is the adapter for the recyclerView
+ * @author alexleyva
+ * @since 2024-04-18
+ *  */
+// Credit to Poleon for helping create this class
 
-// This class adds the recycle view "activity_entry" to "activity_playlist
-public class EditablePlaylistAdapter extends RecyclerView.Adapter<playlistVH> {
-    public EditablePlaylistAdapter(List<String> entries) {
-        this.entries = entries;
-    }
+/** This adapter class is an extenstion of "PlayListTrackVH" class
+ *
+ *  */
+public class EditablePlaylistAdapter extends RecyclerView.Adapter<PlaylistTrackVH> {
+    /** The activity the adapter is running under */
+  private final AppCompatActivity activity;
+    /** Our ArrayList based on the "Track" class */
+  private final ArrayList<Track> PlaylistTrack;
+    /** Boolean to show the play button */
+  private final boolean displayPlayButton;
 
-    List<String> entries;
+    /** Creates a new Playlist Adapter
+     * @param activity
+     * @param PlaylistTrack
+     * @param displayPlayButton
+     *  */
+  public EditablePlaylistAdapter(
+      AppCompatActivity activity, ArrayList<Track> PlaylistTrack, boolean displayPlayButton) {
+    // this.context = context;
+    this.activity = activity;
+    this.PlaylistTrack = PlaylistTrack;
+    this.displayPlayButton = displayPlayButton;
+  }
 
-    @NonNull
-    @Override
-    public playlistVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.activity_entry,parent,false);
-    return new playlistVH(view).linkAdapter(this);
-    }
+    /** Views layout of "activity_entry"
+     * @param parent
+     * @param viewType
+     *  */
+  @NonNull
+  @Override
+  public PlaylistTrackVH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    // to inflate the layout for each item of recycler view
+    View view =
+        LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_entry, parent, false);
+    return new PlaylistTrackVH(activity, view);
+  }
 
-    @Override
-    public void onBindViewHolder(@NonNull playlistVH holder, int position) {
-        holder.textView.setText(entries.get(position));
+    /** Binds values retrived from "TrackMetadata" class
+     * @param holder
+     * @param position
+     *  */
+  @Override
+  public void onBindViewHolder(@NonNull PlaylistTrackVH holder, int position) {
+    // gets position of PlaylistTrack array
+    Track track = PlaylistTrack.get(position);
 
-    }
+    // UI update handler
+    Handler updateUIHandler = new Handler(Looper.getMainLooper());
+    // Thread for network calls to be able to get info from our links
+    Thread metadataThread =
+        new Thread(
+            new Runnable() {
+              @Override
+              public void run() {
+                TrackMetadata trackMetadata =
+                    TrackMetadata.fromMusicSource(track.getSource(), track.getSourceId());
 
-    @Override
-    public int getItemCount() {
-        return entries.size();
-    }
+                updateUIHandler.post(
+                    new Runnable() {
+                      @Override
+                      public void run() {
+                        TrackMetadata thisMetaData;
+                        boolean hidePlayButtons = false;
+                        if (trackMetadata == null) {
+                          thisMetaData = new TrackMetadata("(Unknown", "(Unknown)", null);
+                          hidePlayButtons = true;
+                        } else {
+                          thisMetaData = trackMetadata;
+                        }
 
+                        if (displayPlayButton && !hidePlayButtons) {
+                          holder.setButton_Type(track.getSource(), track.getSourceId());
+                        }
+                        holder.setArtists_Name(thisMetaData.getArtistLine());
+                        holder.setSong_Name(thisMetaData.getTitle());
+                        holder.setSong_Pic(thisMetaData.getCoverArtUrl());
+                        //deletes entry when button is pressed
+                        holder.deleteButton.setOnClickListener(
+                            new View.OnClickListener() {
+                              @Override
+                              public void onClick(View v) {
+                                Log.e("Pushed", "Delete Button has been pressed");
+                                PlaylistTrack.remove(position);
+                                notifyDataSetChanged();
+                              }
+                            });
+                      }
+                    });
+              }
+            });
+    metadataThread.start();
+  }
 
-
-
-
-
-
-}
-
-// Playlist Viewholder class
-class playlistVH extends RecyclerView.ViewHolder{
-    TextView textView;
-    private EditablePlaylistAdapter adapter;
-
-    public playlistVH(@NonNull View itemView){
-        super(itemView);
-
-        textView = itemView.findViewById(R.id.Entry);
-        itemView.findViewById(R.id.delete_Button).setOnClickListener(view -> {
-            adapter.entries.remove(getAdapterPosition());
-            adapter.notifyItemRemoved(getAdapterPosition());
-        })
-        ;
-    }
-
-    public playlistVH linkAdapter (EditablePlaylistAdapter adapter){
-        this.adapter = adapter;
-        return this;
-    }
-
+    /** @return PlaylistTrack's size */
+  @Override
+  public int getItemCount() {
+    // this method is used for showing number of card items in recycler view
+    return PlaylistTrack.size();
+  }
 }

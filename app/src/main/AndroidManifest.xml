@@ -18,12 +18,19 @@
             android:exported="true"
             android:label="User Page"
             />
+
         <activity android:name=".PlaylistEditor"
             android:exported="true"
             android:label="Playlist Editor"/>
+
         <activity android:name=".OtherUserActivity"
             android:exported="true"
             android:label="OtherUserActivity"/>
+
+        <activity android:name=".AddNewSong"
+            android:exported="true"
+            android:label="Add New Song"/>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".PlaylistEditor">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlist_editor"
         android:layout_width="342dp"

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".UserActivity" >
 
+
     <EditText
         android:id="@+id/PlaylistDescription"
         android:layout_width="344dp"

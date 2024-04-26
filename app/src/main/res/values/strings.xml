@@ -23,4 +23,6 @@
     <string name="paste_link_here">Paste link here...</string>
     <string name="youtube_buttonName">Youtube</string>
     <string name="spotify_buttonName">Spotify</string>
+    <string name="song_name">Song Name</string>
+    <string name="artists_name">Artist(s) Name</string>
 </resources>
