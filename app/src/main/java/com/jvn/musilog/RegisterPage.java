@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.jvn.musilog.util.SettingsActivity;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
 
@@ -102,7 +103,7 @@ public class RegisterPage extends AppCompatActivity {
                                 RegisterPage.this, "Authentication Successful.", Toast.LENGTH_SHORT)
                             .show();
                         FirebaseUser user = mAuth.getCurrentUser();
-                        Intent intent = new Intent(getApplicationContext(), Landing_page.class);
+                        Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
                         startActivity(intent);
                         finish();
 

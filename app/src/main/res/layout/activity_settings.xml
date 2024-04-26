@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".SettingsActivity">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".SettingsActivity"
+        tools:layout_editor_absoluteX="0dp">
 
         <!-- Switches for settings options -->
         <Switch
@@ -15,16 +19,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Background Sync" />
+            android:minHeight="48dp"
+            android:text="@string/background_sync"
+            tools:ignore="RelativeOverlap,UseSwitchCompatOrMaterialXml" />
 
         <Switch
             android:id="@+id/switch_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/switch_background_sync"
-            android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
-            android:text="Enable Notifications" />
+            android:layout_marginTop="16dp"
+            android:text="@string/enable_notifications"
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
 
         <Switch
             android:id="@+id/switch_language"
@@ -33,55 +40,77 @@
             android:layout_below="@id/switch_notification"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Language" />
+            android:text="@string/language"
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
 
         <Switch
             android:id="@+id/switch_dark_mode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/switch_language"
-            android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"
-            android:text="Dark Mode" />
+            android:layout_marginTop="16dp"
+            android:minHeight="48dp"
+            android:text="@string/dark_mode"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <!-- Logout button -->
         <Button
-            android:id="@+id/btn_logout"
+            android:id="@+id/Reset_Password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/switch_dark_mode"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Logout" />
+            android:text="@string/resetPassword" />
 
         <!--Creators -->
         <Button
-            android:id="@+id/btn_about_creators"
+            android:id="@+id/DeleteButtonSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btn_logout"
+            android:layout_below="@id/Reset_Password"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="About Creators" />
+            android:text="@string/deleteUser" />
         <!-- Reset Password button -->
         <Button
-            android:id="@+id/resetPasswordButton"
+            android:id="@+id/Logout_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btn_about_creators"
+            android:layout_below="@id/DeleteButtonSettings"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
-            android:text="Reset Password" />
+            android:text="@string/log_out" />
         <!-- Change Email button -->
-        <Button
-            android:id="@+id/changeEmailButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/resetPasswordButton"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
-            android:text="Change Email" />
 
+        <Button
+            android:id="@+id/creator_button"
+            android:layout_width="154dp"
+            android:layout_height="55dp"
+            android:layout_above="@+id/switch_background_sync"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="129dp"
+            android:layout_marginEnd="127dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/creators"
+            tools:ignore="VisualLintOverlap,VisualLintButtonSize" />
+
+        <ImageView
+            android:id="@+id/Settingslogo"
+            android:layout_width="347dp"
+            android:layout_height="231dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="484dp"
+            android:importantForAccessibility="no"
+            app:srcCompat="@drawable/logo_only_nobackground"
+            tools:ignore="ImageContrastCheck" />
 
 
     </RelativeLayout>
