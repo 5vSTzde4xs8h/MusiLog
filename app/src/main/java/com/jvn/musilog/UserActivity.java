@@ -35,6 +35,7 @@ public class UserActivity extends AppCompatActivity {
     /** Sets editorButton as EditPlaylist_Button from activity_playlist_editor.xml */
     editorButton = (Button) findViewById(R.id.EditPlaylist_Button);
 
+
     /** When button is clicked, the app will switch from "UserActivity" page to "PlaylistEditor"
      *  page */
     editorButton.setOnClickListener(

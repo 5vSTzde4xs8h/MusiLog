@@ -9,40 +9,75 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/playlist_editor"
         android:layout_width="342dp"
-        android:layout_height="586dp"
+        android:layout_height="399dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="41dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:layout_constraintVertical_weight="1" />
+
+    <EditText
+        android:id="@+id/song_Link"
+        android:layout_width="293dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_marginBottom="112dp"
+        android:background="@color/md_theme_primaryContainer_mediumContrast"
+        android:ems="10"
+        android:hint="@string/paste_link_here"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/goBack_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginEnd="53dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="52dp"
         android:text="Go Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/addPlaylist_Button"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/playlist_editor"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/song_Link"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/addPlaylist_Button"
+        android:layout_width="112dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="Find Songs"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.886"
+        app:layout_constraintStart_toEndOf="@+id/goBack_Button"
+        app:layout_constraintTop_toBottomOf="@+id/song_Link"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/addLinkToPlaylist_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="53dp"
-        android:layout_marginEnd="53dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginEnd="33dp"
         android:layout_marginBottom="52dp"
         android:text="Add"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/goBack_Button" />
+        app:layout_constraintEnd_toStartOf="@+id/addPlaylist_Button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/goBack_Button"
+        app:layout_constraintTop_toBottomOf="@+id/song_Link"
+        app:layout_constraintVertical_bias="1.0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

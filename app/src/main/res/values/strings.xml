@@ -18,8 +18,9 @@
     <string name="auth_required">Sign-in is required, please try again.</string>
     <string name="auth_error">Sign-in error, please try again.</string>
     <string name="Delete">Delete</string>
-    <string name="hello_user_addLink_partOne">Hello user, please enter link from: </string>
-    <string name="hello_user_addLink_partTwo">then click \"Add\" to add songs to playlist</string>
+    <string name="hello_user_addLink_partOne">Hello user, click these buttons to go to their website: </string>
+    <string name="hello_user_addLink_partTwo">then copy the share link, paste it in the text box in
+        the previous page and hit "Add".</string>
     <string name="paste_link_here">Paste link here...</string>
     <string name="youtube_buttonName">Youtube</string>
     <string name="spotify_buttonName">Spotify</string>
