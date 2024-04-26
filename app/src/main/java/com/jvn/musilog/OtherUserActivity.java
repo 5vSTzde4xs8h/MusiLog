@@ -91,13 +91,13 @@ public class OtherUserActivity extends AppCompatActivity {
 
   /** Listener to be invoked when a Firestore query necessary for the activity fails. */
   private final OnFailureListener criticalQueryFailureListener =
-          new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-              Log.e(TAG, e.toString());
-              finish();
-            }
-          };
+      new OnFailureListener() {
+        @Override
+        public void onFailure(@NonNull Exception e) {
+          Log.e(TAG, e.toString());
+          finish();
+        }
+      };
 
   /**
    * Populates the playlist view.
@@ -117,86 +117,26 @@ public class OtherUserActivity extends AppCompatActivity {
   /** Queries Firestore for rating information and updates the rating text view. */
   private void updateRatingText() {
     ratingQuery
-            .get(AggregateSource.SERVER)
-            .addOnSuccessListener(
-                    new OnSuccessListener<AggregateQuerySnapshot>() {
-                      @Override
-                      public void onSuccess(AggregateQuerySnapshot aggregateQuerySnapshot) {
-                        long numRatings = aggregateQuerySnapshot.get(AggregateField.count());
+        .get(AggregateSource.SERVER)
+        .addOnSuccessListener(
+            new OnSuccessListener<AggregateQuerySnapshot>() {
+              @Override
+              public void onSuccess(AggregateQuerySnapshot aggregateQuerySnapshot) {
+                long numRatings = aggregateQuerySnapshot.get(AggregateField.count());
 
-                        Double averageRating =
-                                aggregateQuerySnapshot.get(
-                                        AggregateField.average(DocumentFields.Rating.RATING_FIELD));
+                Double averageRating =
+                    aggregateQuerySnapshot.get(
+                        AggregateField.average(DocumentFields.Rating.RATING_FIELD));
 
-                        if (averageRating == null) {
-                          averageRating = 0.0;
-                        }
-
-                        String ratingString = getString(R.string.average_rating, averageRating, numRatings);
-                        ratingTextView.setText(ratingString);
-                      }
-                    })
-            .addOnFailureListener(criticalQueryFailureListener);
-  }
-
-  /** Initialises the rating bar and its functionality. */
-  private void setupRatingBar() {
-    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
-    if (currentUser == null) {
-      Log.e(TAG, "Could not retrieve user when setting up rating bar");
-      finish();
-      return;
-    }
-
-    if (currentUser.getUid().equals(userId)) {
-      // the user should not be able to rate their own playlist
-      thisUserRatingBar.setVisibility(View.GONE);
-    } else {
-      // listen for rating bar changes
-      thisUserRatingBar.setOnRatingBarChangeListener(
-              new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                  if ((!fromUser) || (ratingBar != thisUserRatingBar)) {
-                    return;
-                  }
-
-                  Task<Void> operation;
-
-                  if (rating == 0) {
-                    // 0 is the same as no rating
-                    operation = thisUserRatingDocument.delete();
-                  } else {
-                    operation = thisUserRatingDocument.set(new Rating(rating));
-                  }
-
-                  operation
-                          .addOnSuccessListener(
-                                  new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-                                      lastRating = rating;
-                                      updateRatingText();
-                                    }
-                                  })
-                          .addOnFailureListener(
-                                  new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                      // reset the rating on the bar to the previous value
-                                      thisUserRatingBar.setRating(lastRating);
-
-                                      Snackbar.make(
-                                                      findViewById(R.id.main),
-                                                      R.string.rating_set_error,
-                                                      BaseTransientBottomBar.LENGTH_LONG)
-                                              .show();
-                                    }
-                                  });
+                if (averageRating == null) {
+                  averageRating = 0.0;
                 }
-              });
-    }
+
+                String ratingString = getString(R.string.average_rating, averageRating, numRatings);
+                ratingTextView.setText(ratingString);
+              }
+            })
+        .addOnFailureListener(criticalQueryFailureListener);
   }
 
   /** Initialises the rating bar and its functionality. */
@@ -272,12 +212,12 @@ public class OtherUserActivity extends AppCompatActivity {
     setContentView(R.layout.activity_other_user);
 
     ViewCompat.setOnApplyWindowInsetsListener(
-            findViewById(R.id.main),
-            (v, insets) -> {
-              Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-              v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-              return insets;
-            });
+        findViewById(R.id.main),
+        (v, insets) -> {
+          Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+          v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+          return insets;
+        });
 
     // bind views
     playlistDescriptionView = findViewById(R.id.playlistDescription);
@@ -316,8 +256,8 @@ public class OtherUserActivity extends AppCompatActivity {
     // the number of ratings and the average rating of the user's playlist
     // https://firebase.google.com/docs/firestore/query-data/aggregation-queries
     ratingQuery =
-            userRatingCollection.aggregate(
-                    AggregateField.count(), AggregateField.average(DocumentFields.Rating.RATING_FIELD));
+        userRatingCollection.aggregate(
+            AggregateField.count(), AggregateField.average(DocumentFields.Rating.RATING_FIELD));
   }
 
   /** Retrieve the user's data and set up UI events. */
@@ -333,54 +273,52 @@ public class OtherUserActivity extends AppCompatActivity {
 
     // get the user's data
     userDocument
-            .get()
-            .addOnSuccessListener(
-                    new OnSuccessListener<DocumentSnapshot>() {
-                      @Override
-                      public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        User user = documentSnapshot.toObject(User.class);
+        .get()
+        .addOnSuccessListener(
+            new OnSuccessListener<DocumentSnapshot>() {
+              @Override
+              public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
 
-                        // check if the document could be cast to User
-                        if (user == null) {
-                          finish();
-                          Log.e(TAG, "Unable to cast User object; check the document fields");
-                          return;
-                        }
+                // check if the document could be cast to User
+                if (user == null) {
+                  finish();
+                  Log.e(TAG, "Unable to cast User object; check the document fields");
+                  return;
+                }
 
-                        playlistDescriptionView.setText(user.getPlaylistDescription());
-                        setupPlaylistView(user.getPlaylist());
-                      }
-                    })
-            .addOnFailureListener(criticalQueryFailureListener);
+                playlistDescriptionView.setText(user.getPlaylistDescription());
+                setupPlaylistView(user.getPlaylist());
+              }
+            })
+        .addOnFailureListener(criticalQueryFailureListener);
 
     // get the current user's rating for the playlist
     thisUserRatingDocument
+        .get()
+        .addOnSuccessListener(
+            new OnSuccessListener<DocumentSnapshot>() {
+              @Override
+              public void onSuccess(DocumentSnapshot documentSnapshot) {
+                float rating;
 
-            .get()
-            .addOnSuccessListener(
-                    new OnSuccessListener<DocumentSnapshot>() {
-                      @Override
-                      public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        float rating;
+                if (!documentSnapshot.exists()) {
+                  rating = 0;
+                } else {
+                  Double ratingDouble =
+                      documentSnapshot.getDouble(DocumentFields.Rating.RATING_FIELD);
 
-                        if (!documentSnapshot.exists()) {
-                          rating = 0;
-                        } else {
-                          Double ratingDouble =
-                                  documentSnapshot.getDouble(DocumentFields.Rating.RATING_FIELD);
+                  if (ratingDouble == null) {
+                    rating = 0;
+                  } else {
+                    rating = ratingDouble.floatValue();
+                  }
+                }
 
-                          if (ratingDouble == null) {
-                            rating = 0;
-                          } else {
-                            rating = ratingDouble.floatValue();
-                          }
-                        }
-
-                        lastRating = rating;
-                        thisUserRatingBar.setRating(lastRating);
-                      }
-                    })
-            .addOnFailureListener(criticalQueryFailureListener);
-
+                lastRating = rating;
+                thisUserRatingBar.setRating(lastRating);
+              }
+            })
+        .addOnFailureListener(criticalQueryFailureListener);
   }
 }
