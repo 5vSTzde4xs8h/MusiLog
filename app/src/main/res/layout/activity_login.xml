@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8ED9F"
+    tools:context=".Login">
+
+    <Button
+        android:id="@+id/ReturnButton"
+        android:layout_width="121dp"
+        android:layout_height="52dp"
+        android:text="@string/Return"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.927" />
+
+    <EditText
+        android:id="@+id/Email_Login"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
+        android:hint="@string/Email_string"
+        android:importantForAutofill="no"
+        android:inputType="text|textEmailAddress"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.486"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.58"
+        tools:ignore="LabelFor,TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/password_Login"
+        android:layout_width="374dp"
+        android:layout_height="48dp"
+        android:hint="@string/Password_string"
+        android:importantForAutofill="no"
+        android:inputType="text|textPassword"
+        android:textColor="#000000"
+        android:textColorHint="#000000"
+        android:textColorLink="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.687"
+        tools:ignore="LabelFor,TextContrastCheck" />
+
+    <Button
+        android:id="@+id/Login_button"
+        android:layout_width="125dp"
+        android:layout_height="52dp"
+        android:text="@string/Login"
+        android:textColorLink="#F44336"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.812" />
+
+    <ImageView
+        android:id="@+id/musiLogo"
+        android:layout_width="302dp"
+        android:layout_height="305dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.093"
+        app:srcCompat="@drawable/logo_only_nobackground"
+        tools:ignore="ContentDescription,ImageContrastCheck" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,17 +1,26 @@
 package com.jvn.musilog.util;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
-
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
-
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.jvn.musilog.MainActivity;
 import com.jvn.musilog.R;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * SettingsActivity class allows users to customize app settings.
@@ -24,11 +33,13 @@ public class SettingsActivity extends AppCompatActivity {
     private Switch switchLanguage;
     private Switch switchDarkMode;
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
     // SharedPreferences for storing settings state
     private SharedPreferences sharedPreferences;
 
     // Logout button
-    private Button btnLogout;
+    private Button LogoutButton, DeleteButton , ResetLinkButton;
 
     // Button to redirect to creators information
     private Button btnCreatorsInfo;
@@ -48,12 +59,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Set listeners for switch changes
         setSwitchListeners();
 
-        // Set click listener for logout button
-        btnLogout.setOnClickListener(v -> {
-            // Handle logout logic here
-           
-        });
-
         // Set click listener for creators info button
         btnCreatorsInfo.setOnClickListener(v -> {
             // Redirect the user to the creators information URL
@@ -61,18 +66,96 @@ public class SettingsActivity extends AppCompatActivity {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(creatorsInfoUrl));
             startActivity(browserIntent);
         });
+        /**
+         * The logout Button log outs the user.
+         * @param FirebaseAuth gets an instance and calls signout function.
+         * This button returns the user to the main activity
+         */
+
+        LogoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseAuth.getInstance().signOut();
+
+                if ((FirebaseAuth.getInstance().getCurrentUser()) == null) {
+                    Toast.makeText(SettingsActivity.this, "Signing out", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(SettingsActivity.this, "Error", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        /**
+         * When the delete button is pressed, then the user account is deleted from Firebase.
+         */
+        DeleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.delete()
+                        .addOnCompleteListener(
+                                new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d(TAG, "User account deleted.");
+                                            Toast.makeText(SettingsActivity.this, "Account Deleted", Toast.LENGTH_LONG)
+                                                    .show();
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(SettingsActivity.this, "Error", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });
+            }
+        }); // end of Onclick for Delete button
+
+        /**
+         * This button resets the password via email
+         * @param Firebase Auth grabs an instance of the firebase and
+         * @string emailAddress gets the curent user's email
+         */
+
+        ResetLinkButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                // This needs to call to a function that grabs user email
+                String emailAddress = user.getEmail();
+                Log.d(TAG, emailAddress);
+                auth.sendPasswordResetEmail(emailAddress)
+                        .addOnCompleteListener(
+                                new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Toast.makeText(SettingsActivity.this, "Email Sent", Toast.LENGTH_LONG).show();
+                                        }
+                                    }
+                                });   
+            }
+        }); // end of ONclickListener for Reset link button
     }
+
 
     /**
      * Initialize switches, logout button, and creators info button.
      */
     private void initializeViews() {
+        // These are the switches on the settings page
         switchNotification = findViewById(R.id.switch_notification);
         switchBackgroundSync = findViewById(R.id.switch_background_sync);
         switchLanguage = findViewById(R.id.switch_language);
         switchDarkMode = findViewById(R.id.switch_dark_mode);
-        btnLogout = findViewById(R.id.btn_logout);
-        btnCreatorsInfo = findViewById(R.id.btn_about_creators);
+        // These are all the buttons on the settings page
+        LogoutButton = findViewById(R.id.Logout_Button);
+        DeleteButton = findViewById(R.id.DeleteButtonSettings);
+        ResetLinkButton = findViewById(R.id.Reset_Password);
+        btnCreatorsInfo = findViewById(R.id.creator_button);
     }
 
     /**

@@ -17,6 +17,26 @@
 
     <string name="auth_required">Sign-in is required, please try again.</string>
     <string name="auth_error">Sign-in error, please try again.</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="Login">Login</string>
+    <string name="Return">Return</string>
+    <string name="go_back">Go back</string>
+    <string name="Email_string">Email</string>
+    <string name="Password_string">Password</string>
+    <string name="Register_string">Register</string>
+    <string name="TODO"> id = "@+id/Email_Hint" </string>
+    <string name="this_is_a_test">THIS IS A TEST</string>
+    <string name="log_out">Log Out</string>
+    <string name="deleteUser">Delete Account</string>
+    <string name="resetPassword">Reset Password</string>
+    <string name="creators">About Creators</string>
+    <string name="Send_Email">Reset Password </string>
+    <string name="reset_password">Reset Password</string>
+    <string name="background_sync">Background Sync</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="enable_notifications">Enable Notifications</string>
+    <string name="language">Language</string>
     <string name="Delete">Delete</string>
     <string name="hello_user_addLink_partOne">Hello user, click these buttons to go to their website: </string>
     <string name="hello_user_addLink_partTwo">then copy the share link, paste it in the text box in
@@ -34,4 +54,5 @@
 
     <string name="playlist_remove_error">Could not remove song from playlist</string>
     <string name="playlist_remove_success">Successfully removed song from playlist</string>
+
 </resources>

@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -54,9 +54,6 @@ public class OtherUserActivity extends AppCompatActivity {
   /** Class tag for identifying output in Logcat. */
   private static final String TAG = "OtherUserActivity";
 
-  /** The Firebase Auth instance. */
-  private FirebaseAuth firebaseAuth;
-
   /** The Firestore query for the user's data. */
   private DocumentReference userDocument;
 
@@ -83,9 +80,6 @@ public class OtherUserActivity extends AppCompatActivity {
    */
   private MaterialRatingBar thisUserRatingBar;
 
-  /** The ID of the user whose data will be retrieved. */
-  private String userId;
-
   /** The current rating of the currently-authenticated user's rating of the user's playlist. */
   private float lastRating;
 
@@ -109,7 +103,7 @@ public class OtherUserActivity extends AppCompatActivity {
       playlist = new ArrayList<Track>();
     }
 
-    PlaylistAdapter playlistAdapter = new PlaylistAdapter(this, playlist, true);
+    PlaylistAdapter playlistAdapter = new PlaylistAdapter(this, playlist);
     playlistView.setLayoutManager(new LinearLayoutManager(this));
     playlistView.setAdapter(playlistAdapter);
   }
@@ -137,66 +131,6 @@ public class OtherUserActivity extends AppCompatActivity {
               }
             })
         .addOnFailureListener(criticalQueryFailureListener);
-  }
-
-  /** Initialises the rating bar and its functionality. */
-  private void setupRatingBar() {
-    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-
-    if (currentUser == null) {
-      Log.e(TAG, "Could not retrieve user when setting up rating bar");
-      finish();
-      return;
-    }
-
-    if (currentUser.getUid().equals(userId)) {
-      // the user should not be able to rate their own playlist
-      thisUserRatingBar.setVisibility(View.GONE);
-    } else {
-      // listen for rating bar changes
-      thisUserRatingBar.setOnRatingBarChangeListener(
-          new RatingBar.OnRatingBarChangeListener() {
-            @Override
-            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-              if ((!fromUser) || (ratingBar != thisUserRatingBar)) {
-                return;
-              }
-
-              Task<Void> operation;
-
-              if (rating == 0) {
-                // 0 is the same as no rating
-                operation = thisUserRatingDocument.delete();
-              } else {
-                operation = thisUserRatingDocument.set(new Rating(rating));
-              }
-
-              operation
-                  .addOnSuccessListener(
-                      new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                          lastRating = rating;
-                          updateRatingText();
-                        }
-                      })
-                  .addOnFailureListener(
-                      new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                          // reset the rating on the bar to the previous value
-                          thisUserRatingBar.setRating(lastRating);
-
-                          Snackbar.make(
-                                  findViewById(R.id.main),
-                                  R.string.rating_set_error,
-                                  BaseTransientBottomBar.LENGTH_LONG)
-                              .show();
-                        }
-                      });
-            }
-          });
-    }
   }
 
   /**
@@ -238,10 +172,10 @@ public class OtherUserActivity extends AppCompatActivity {
     }
 
     FirebaseFirestore firestore = FirebaseFirestore.getInstance();
-    firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-    userId = extraData.getString("userId");
+    String userId = extraData.getString("userId");
 
     if ((userId == null) || (currentUser == null)) {
       finish();
@@ -265,9 +199,6 @@ public class OtherUserActivity extends AppCompatActivity {
   protected void onStart() {
     super.onStart();
 
-    // setup rating bar
-    setupRatingBar();
-
     // get the playlist rating information
     updateRatingText();
 
@@ -285,6 +216,13 @@ public class OtherUserActivity extends AppCompatActivity {
                   finish();
                   Log.e(TAG, "Unable to cast User object; check the document fields");
                   return;
+                }
+
+                // set page title
+                ActionBar actionBar = getSupportActionBar();
+
+                if (actionBar != null) {
+                  actionBar.setTitle(String.format("%s's Playlist", user.getDisplayName()));
                 }
 
                 playlistDescriptionView.setText(user.getPlaylistDescription());
@@ -320,5 +258,49 @@ public class OtherUserActivity extends AppCompatActivity {
               }
             })
         .addOnFailureListener(criticalQueryFailureListener);
+
+    // listen for rating bar changes
+    thisUserRatingBar.setOnRatingBarChangeListener(
+        new RatingBar.OnRatingBarChangeListener() {
+          @Override
+          public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+            if ((!fromUser) || (ratingBar != thisUserRatingBar)) {
+              return;
+            }
+
+            Task<Void> operation;
+
+            if (rating == 0) {
+              // 0 is the same as no rating
+              operation = thisUserRatingDocument.delete();
+            } else {
+              operation = thisUserRatingDocument.set(new Rating(rating));
+            }
+
+            operation
+                .addOnSuccessListener(
+                    new OnSuccessListener<Void>() {
+                      @Override
+                      public void onSuccess(Void unused) {
+                        lastRating = rating;
+                        updateRatingText();
+                      }
+                    })
+                .addOnFailureListener(
+                    new OnFailureListener() {
+                      @Override
+                      public void onFailure(@NonNull Exception e) {
+                        // reset the rating on the bar to the previous value
+                        thisUserRatingBar.setRating(lastRating);
+
+                        Snackbar.make(
+                                findViewById(R.id.main),
+                                R.string.rating_set_error,
+                                BaseTransientBottomBar.LENGTH_LONG)
+                            .show();
+                      }
+                    });
+          }
+        });
   }
 }

@@ -1,5 +1,6 @@
 [versions]
 agp = "8.3.0"
+firebaseBomVersion = "32.8.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
@@ -14,8 +15,13 @@ googleApiServicesYouTube = "v3-rev20240310-2.0.0"
 spotifyWebApiJava = "9.0.0-RC1"
 materialRatingBar = "1.4.0"
 glide = "4.16.0"
+navigationFragment = "2.6.0"
+navigationUi = "2.6.0"
+googleServicesVersion = "4.4.1"
+firebaseInappmessaging = "20.4.2"
 
 [libraries]
+firebase-bom-v3281 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -30,6 +36,10 @@ google-api-services-youtube = { module = "com.google.apis:google-api-services-yo
 spotify-web-api-java = { module = "se.michaelthelin.spotify:spotify-web-api-java", version.ref = "spotifyWebApiJava" }
 materialratingbar = { module = "me.zhanghai.android.materialratingbar:library", version.ref = "materialRatingBar" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
+navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
+google-services = { group = "com.google.gms", name = "google-services", version.ref = "googleServicesVersion" }
+firebase-inappmessaging = { group = "com.google.firebase", name = "firebase-inappmessaging", version.ref = "firebaseInappmessaging" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

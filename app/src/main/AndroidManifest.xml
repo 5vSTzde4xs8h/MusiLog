@@ -6,9 +6,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/musilog"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/musilog"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusiLog"
         tools:targetApi="31">
@@ -23,6 +23,18 @@
             android:exported="true"
             android:label="Playlist Editor" />
 
+        <activity
+            android:name=".Landing_page"
+            android:exported="false" />
+        <activity
+            android:name=".TestActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Login"
+            android:exported="false" />
+        <activity
+            android:name=".RegisterPage"
+            android:exported="false" />
         <activity
             android:name=".OtherUserActivity"
             android:exported="true"
