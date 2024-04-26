@@ -48,7 +48,7 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar;
  * {@code userId}. See {@link Intent#putExtra(String, String)}.
  *
  * @author Poleon Banouvong
- * @since 2023-04-05
+ * @since 2024-04-05
  */
 public class OtherUserActivity extends AppCompatActivity {
   /** Class tag for identifying output in Logcat. */
