@@ -30,5 +30,8 @@
     <string name="playlist_editor_empty_url">Please provide a song URL</string>
     <string name="playlist_add_error">Could not add song to playlist</string>
     <string name="playlist_add_duplicate">This song is already in your playlist</string>
-    <string name="playlist_add_success">Successfully updated playlist</string>
+    <string name="playlist_add_success">Successfully added song to playlist</string>
+
+    <string name="playlist_remove_error">Could not remove song from playlist</string>
+    <string name="playlist_remove_success">Successfully removed song from playlist</string>
 </resources>

@@ -44,12 +44,6 @@ public class PlaylistEditor extends AppCompatActivity {
   /** Class tag for identifying output in Logcat. */
   private static final String TAG = "PlaylistEditor";
 
-  /** The Firestore instance. */
-  private FirebaseFirestore firestore;
-
-  /** The Firebase Auth instance. */
-  private FirebaseAuth firebaseAuth;
-
   /** Button to go back to User page */
   private Button backButton;
 
@@ -61,9 +55,6 @@ public class PlaylistEditor extends AppCompatActivity {
 
   /** The EditText for the song URL to be added. */
   private EditText songLink;
-
-  /** The RecyclerView for the user's playlist. */
-  private RecyclerView playlist;
 
   /** The adapter for an editable playlist. */
   private EditablePlaylistAdapter editablePlaylistAdapter;
@@ -78,7 +69,7 @@ public class PlaylistEditor extends AppCompatActivity {
   ArrayList<Track> playlistArray = new ArrayList<Track>();
 
   /**
-   * Shows a snackbar message
+   * Shows a snackbar message.
    *
    * @param message The resource ID of the message string
    */
@@ -107,16 +98,16 @@ public class PlaylistEditor extends AppCompatActivity {
         });
 
     // get Firebase instances
-    firestore = FirebaseFirestore.getInstance();
-    firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseFirestore firestore = FirebaseFirestore.getInstance();
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
     // bind views
     addButton = findViewById(R.id.addPlaylist_Button);
     backButton = findViewById(R.id.goBack_Button);
     songLink = findViewById(R.id.song_Link);
     linkToPlaylistButton = findViewById(R.id.addLinkToPlaylist_Button);
-    playlist = findViewById(R.id.playlist_editor);
 
+    RecyclerView playlist = findViewById(R.id.playlist_editor);
     editablePlaylistAdapter = new EditablePlaylistAdapter(this, playlistArray, true);
     playlist.setLayoutManager(new LinearLayoutManager(this));
     playlist.setAdapter(editablePlaylistAdapter);
