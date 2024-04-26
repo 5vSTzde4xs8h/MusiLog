@@ -74,15 +74,19 @@
             android:layout_marginTop="16dp"
             android:text="@string/deleteUser" />
         <!-- Reset Password button -->
+        <!-- Change Email button -->
+
         <Button
             android:id="@+id/Logout_Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/DeleteButtonSettings"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="130dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="129dp"
             android:text="@string/log_out" />
-        <!-- Change Email button -->
 
         <Button
             android:id="@+id/creator_button"
