@@ -83,9 +83,9 @@
             android:layout_below="@id/DeleteButtonSettings"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="130dp"
+            android:layout_marginStart="132dp"
             android:layout_marginTop="7dp"
-            android:layout_marginEnd="129dp"
+            android:layout_marginEnd="127dp"
             android:text="@string/log_out" />
 
         <Button
