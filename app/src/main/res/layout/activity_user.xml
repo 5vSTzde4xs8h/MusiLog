@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserActivity" >
+
+
+    <EditText
+        android:id="@+id/PlaylistDescription"
+        android:layout_width="344dp"
+        android:layout_height="147dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="25dp"
+        android:background="@null"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:inputType="text"
+        android:text="@string/description_section"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/PlaylistDescription_TextView"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="11dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Playlist Description:"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/PlaylistDescription"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/justLogo_img"
+        android:layout_width="112dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="17dp"
+        app:layout_constraintEnd_toStartOf="@+id/HelloUser"
+        app:layout_constraintStart_toEndOf="@+id/PlaylistName_EditView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_only" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/PlaylistPreview"
+        android:layout_width="179dp"
+        android:layout_height="254dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/Rating_TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PlaylistName_EditView" />
+
+    <RatingBar
+        android:id="@+id/RatingBar"
+        android:layout_width="240dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="18dp"
+        app:layout_constraintBottom_toTopOf="@+id/PlaylistDescription_TextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/PlaylistName_EditView"
+        android:layout_width="177dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="204dp"
+        android:layout_marginBottom="4dp"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:inputType="text"
+        android:text="@string/playlist_name"
+        app:layout_constraintBottom_toTopOf="@+id/PlaylistPreview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/justLogo_img" />
+
+    <Button
+        android:id="@+id/ShareSearch_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="21dp"
+        android:text="Share or Search"
+        app:layout_constraintBottom_toTopOf="@+id/Settings_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PlaylistPreview"
+        app:layout_constraintTop_toBottomOf="@+id/EditPlaylist_Button" />
+
+    <Button
+        android:id="@+id/Settings_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="170dp"
+        android:text="Settings"
+        app:layout_constraintBottom_toTopOf="@+id/PlaylistDescription"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PlaylistPreview"
+        app:layout_constraintTop_toBottomOf="@+id/ShareSearch_Button" />
+
+    <TextView
+        android:id="@+id/HelloUser"
+        android:layout_width="156dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="215dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="@string/welcome_user"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/EditPlaylist_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/PlaylistName_EditView"
+        app:layout_constraintTop_toBottomOf="@+id/justLogo_img" />
+
+    <TextView
+        android:id="@+id/Rating_TextView"
+        android:layout_width="116dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="258dp"
+        android:layout_marginBottom="3dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text="Rating:"
+        android:textColor="@android:color/black"
+        app:layout_constraintBottom_toTopOf="@+id/RatingBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/EditPlaylist_Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="77dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="21dp"
+        android:text="Edit Playlist"
+        app:layout_constraintBottom_toTopOf="@+id/ShareSearch_Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/PlaylistPreview"
+        app:layout_constraintTop_toBottomOf="@+id/HelloUser" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
