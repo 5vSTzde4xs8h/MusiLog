@@ -199,6 +199,66 @@ public class OtherUserActivity extends AppCompatActivity {
     }
   }
 
+  /** Initialises the rating bar and its functionality. */
+  private void setupRatingBar() {
+    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+    if (currentUser == null) {
+      Log.e(TAG, "Could not retrieve user when setting up rating bar");
+      finish();
+      return;
+    }
+
+    if (currentUser.getUid().equals(userId)) {
+      // the user should not be able to rate their own playlist
+      thisUserRatingBar.setVisibility(View.GONE);
+    } else {
+      // listen for rating bar changes
+      thisUserRatingBar.setOnRatingBarChangeListener(
+          new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+              if ((!fromUser) || (ratingBar != thisUserRatingBar)) {
+                return;
+              }
+
+              Task<Void> operation;
+
+              if (rating == 0) {
+                // 0 is the same as no rating
+                operation = thisUserRatingDocument.delete();
+              } else {
+                operation = thisUserRatingDocument.set(new Rating(rating));
+              }
+
+              operation
+                  .addOnSuccessListener(
+                      new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                          lastRating = rating;
+                          updateRatingText();
+                        }
+                      })
+                  .addOnFailureListener(
+                      new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                          // reset the rating on the bar to the previous value
+                          thisUserRatingBar.setRating(lastRating);
+
+                          Snackbar.make(
+                                  findViewById(R.id.main),
+                                  R.string.rating_set_error,
+                                  BaseTransientBottomBar.LENGTH_LONG)
+                              .show();
+                        }
+                      });
+            }
+          });
+    }
+  }
+
   /**
    * Initialise the activity and UI bindings.
    *
@@ -295,6 +355,7 @@ public class OtherUserActivity extends AppCompatActivity {
 
     // get the current user's rating for the playlist
     thisUserRatingDocument
+
             .get()
             .addOnSuccessListener(
                     new OnSuccessListener<DocumentSnapshot>() {
@@ -320,5 +381,6 @@ public class OtherUserActivity extends AppCompatActivity {
                       }
                     })
             .addOnFailureListener(criticalQueryFailureListener);
+
   }
 }

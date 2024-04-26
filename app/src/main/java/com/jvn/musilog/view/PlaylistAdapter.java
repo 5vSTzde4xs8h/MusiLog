@@ -39,6 +39,7 @@ public class PlaylistAdapter extends RecyclerView.Adapter<TrackViewHolder> {
    *
    * @param activity The activity the adapter is running under
    * @param playlist The playlist to render
+   * @param showPlayButtons If the play buttons for each track should be shown
    */
   public PlaylistAdapter(AppCompatActivity activity, ArrayList<Track> playlist, boolean showPlayButtons) {
     this.activity = activity;
