@@ -56,5 +56,9 @@
     <string name="playlist_remove_error">Could not remove song from playlist</string>
     <string name="playlist_remove_success">Successfully removed song from playlist</string>
     <string name="user_name">User Name</string>
+    <string name="playlist_description">Playlist Description:</string>
+    <string name="share_or_search">Share or Search</string>
+    <string name="rating">Rating:</string>
+    <string name="edit_playlist">Edit Playlist</string>
 
 </resources>

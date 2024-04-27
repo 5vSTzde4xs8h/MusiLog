@@ -48,6 +48,7 @@ public class UserActivity extends AppCompatActivity {
 
   Button settingsButton;
 
+
   /**
    * Initializes (or creates) the the activity and UI bindings to help navigate around the app
    *
@@ -112,6 +113,7 @@ public class UserActivity extends AppCompatActivity {
     userDocument
         .get()
         .addOnSuccessListener(
+
             new OnSuccessListener<DocumentSnapshot>() {
               @Override
               public void onSuccess(DocumentSnapshot documentSnapshot) {
@@ -146,4 +148,5 @@ public class UserActivity extends AppCompatActivity {
               }
             });
   }
+  
 }
