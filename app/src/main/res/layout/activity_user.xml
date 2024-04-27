@@ -46,7 +46,7 @@
         app:layout_constraintEnd_toStartOf="@+id/HelloUser"
         app:layout_constraintStart_toEndOf="@+id/PlaylistName_EditView"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_only" />
+        app:srcCompat="@drawable/logo_only2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PlaylistPreview"
@@ -97,20 +97,20 @@
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="21dp"
         android:text="Share or Search"
-        app:layout_constraintBottom_toTopOf="@+id/Settings_Button"
+        app:layout_constraintBottom_toTopOf="@+id/settings_ButtonUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/PlaylistPreview"
         app:layout_constraintTop_toBottomOf="@+id/EditPlaylist_Button" />
 
     <Button
-        android:id="@+id/Settings_Button"
+        android:id="@+id/settings_ButtonUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="67dp"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="36dp"
         android:layout_marginBottom="170dp"
-        android:text="Settings"
+        android:text="@string/settings"
         app:layout_constraintBottom_toTopOf="@+id/PlaylistDescription"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/PlaylistPreview"

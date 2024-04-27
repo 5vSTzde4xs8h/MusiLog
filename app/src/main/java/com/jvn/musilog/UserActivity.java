@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -20,8 +19,8 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.jvn.musilog.data.Track;
 import com.jvn.musilog.data.User;
+import com.jvn.musilog.util.SettingsActivity;
 import com.jvn.musilog.view.PlaylistAdapter;
-
 import java.util.*;
 
 /**
@@ -47,6 +46,8 @@ public class UserActivity extends AppCompatActivity {
   /** The Button that will navigate user from this activity(User's Homepage) to Playlist Editor */
   Button editorButton;
 
+  Button settingsButton;
+
   /**
    * Initializes (or creates) the the activity and UI bindings to help navigate around the app
    *
@@ -64,7 +65,7 @@ public class UserActivity extends AppCompatActivity {
     // bind views
     editorButton = (Button) findViewById(R.id.EditPlaylist_Button);
     playlistPreview = findViewById(R.id.PlaylistPreview);
-
+    settingsButton = findViewById(R.id.settings_ButtonUser);
     // button to take the user to edit their playlist
     editorButton.setOnClickListener(
         new View.OnClickListener() {
@@ -74,7 +75,19 @@ public class UserActivity extends AppCompatActivity {
             startActivity(intent);
           }
         });
-  }
+
+/**
+ * This is the settings button
+ */
+  settingsButton.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+      startActivity(intent);
+    }
+  });
+
+  }// on create
 
   /**
    * Populates the user's playlist view when the activity (re)starts.
@@ -88,7 +101,8 @@ public class UserActivity extends AppCompatActivity {
     // user must be authenticated
     if (currentUser == null) {
       Log.e(TAG, "User is not logged-in");
-      finish();
+      //Toast new Toast()
+       //finish();
       return;
     }
 
