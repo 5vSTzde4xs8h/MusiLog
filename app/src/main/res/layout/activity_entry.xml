@@ -20,7 +20,8 @@
             android:id="@+id/song_img"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            app:srcCompat="@drawable/pending_icon" />
+            app:srcCompat="@drawable/pending_icon"
+            android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/song_name"
@@ -42,7 +43,8 @@
             android:id="@+id/source_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@tools:sample/avatars"
+            android:importantForAccessibility="no" />
 
         <Button
             android:id="@+id/delete_button"
