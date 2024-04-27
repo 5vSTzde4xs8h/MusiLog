@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:context=".SettingsActivity"
-        tools:layout_editor_absoluteX="0dp">
+        tools:layout_editor_absoluteX="-46dp">
 
         <!-- Switches for settings options -->
         <Switch
@@ -21,7 +21,7 @@
             android:layout_centerInParent="true"
             android:minHeight="48dp"
             android:text="@string/background_sync"
-            tools:ignore="RelativeOverlap,UseSwitchCompatOrMaterialXml" />
+            tools:ignore="RelativeOverlap,UseSwitchCompatOrMaterialXml,VisualLintOverlap" />
 
         <Switch
             android:id="@+id/switch_notification"
@@ -31,7 +31,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="@string/enable_notifications"
-            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck,VisualLintOverlap" />
 
         <Switch
             android:id="@+id/switch_language"
@@ -41,7 +41,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="16dp"
             android:text="@string/language"
-            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck" />
+            tools:ignore="UseSwitchCompatOrMaterialXml,TouchTargetSizeCheck,VisualLintOverlap" />
 
         <Switch
             android:id="@+id/switch_dark_mode"
@@ -86,7 +86,8 @@
             android:layout_marginStart="132dp"
             android:layout_marginTop="7dp"
             android:layout_marginEnd="140dp"
-            android:text="@string/log_out" />
+            android:text="@string/log_out"
+            tools:ignore="VisualLintButtonSize" />
 
         <Button
             android:id="@+id/creator_button"
@@ -94,27 +95,43 @@
             android:layout_height="55dp"
             android:layout_above="@+id/switch_background_sync"
             android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="129dp"
-            android:layout_marginEnd="127dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginStart="131dp"
+            android:layout_marginTop="265dp"
+            android:layout_marginEnd="125dp"
+            android:layout_marginBottom="24dp"
             android:text="@string/creators"
             tools:ignore="VisualLintOverlap,VisualLintButtonSize" />
 
         <ImageView
             android:id="@+id/Settingslogo"
-            android:layout_width="347dp"
-            android:layout_height="231dp"
+            android:layout_width="354dp"
+            android:layout_height="127dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="38dp"
-            android:layout_marginBottom="482dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="28dp"
+            android:layout_marginBottom="569dp"
             android:importantForAccessibility="no"
             app:srcCompat="@drawable/logo_only_nobackground"
             tools:ignore="ImageContrastCheck" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="181dp"
+            android:layout_marginEnd="158dp"
+            android:layout_marginBottom="507dp"
+            android:text="@string/Return" />
 
 
     </RelativeLayout>

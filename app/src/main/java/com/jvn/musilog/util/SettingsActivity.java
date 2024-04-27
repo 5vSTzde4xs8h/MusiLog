@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.jvn.musilog.MainActivity;
 import com.jvn.musilog.R;
+import com.jvn.musilog.UserActivity;
+
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
@@ -38,8 +40,10 @@ public class SettingsActivity extends AppCompatActivity {
     // SharedPreferences for storing settings state
     private SharedPreferences sharedPreferences;
 
-    // Logout button
+    // Logout button , Delete Button, Reset link Button , Return Button
     private Button LogoutButton, DeleteButton , ResetLinkButton;
+
+    Button returnButtonSettings;
 
     // Button to redirect to creators information
     private Button btnCreatorsInfo;
@@ -52,7 +56,6 @@ public class SettingsActivity extends AppCompatActivity {
         // Initialize views and SharedPreferences
         initializeViews();
         sharedPreferences = getSharedPreferences("MySettings", Context.MODE_PRIVATE);
-
         // Load the previous state of the switches from SharedPreferences
         loadPreviousSettings();
 
@@ -139,6 +142,16 @@ public class SettingsActivity extends AppCompatActivity {
                                 });   
             }
         }); // end of ONclickListener for Reset link button
+        returnButtonSettings = findViewById(R.id.button4);
+        returnButtonSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(SettingsActivity.this, "Returning", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), UserActivity.class);
+                startActivity(intent);
+                //finish();
+            }
+        });
     }
 
 
@@ -156,6 +169,7 @@ public class SettingsActivity extends AppCompatActivity {
         DeleteButton = findViewById(R.id.DeleteButtonSettings);
         ResetLinkButton = findViewById(R.id.Reset_Password);
         btnCreatorsInfo = findViewById(R.id.creator_button);
+
     }
 
     /**

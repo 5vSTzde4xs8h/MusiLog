@@ -10,20 +10,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.jvn.musilog.util.SettingsActivity;
-
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 /** Login.java allows the user to login using an email and password. */
@@ -90,9 +86,9 @@ public class Login extends AppCompatActivity {
                           Toast.makeText(Login.this, "Welcome to MusiLog!", Toast.LENGTH_SHORT)
                               .show();
 
-                          Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+                          Intent intent = new Intent(getApplicationContext(), UserActivity.class);
                           startActivity(intent);
-                          finish();
+                          //finish();
                         } else {
                           // If sign in fails, display a message to the user.
                           Log.w(TAG, "signInWithEmail:failure!", task.getException());
